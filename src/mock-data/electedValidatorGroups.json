@@ -1,0 +1,915 @@
+{
+  "0xAC5e5336F96E63950fDcb40B1aBD13B4224AEb4F": {
+    "name": "C-Labs(1) eyJ2ZXJzaW9uIjozLCJpZCI6IjcwN2EwYTA3LTk0ODEtNGU3Ni1hZmEzLTk2ODFhMzkyMWYyYyIsImFkZHJlc3MiOiJhYzVlNTMzNmY5NmU2Mzk1MGZkY2I0MGIxYWJkMTNiNDIyNGFlYjRmIiwiY3J5cHRvIjp7ImNpcGhlcnRleHQiOiI2OWZlZmI0MDNmYTdkOTI1M2EwYzgxM2FjN2FmYzJiYjcwOTI5ODFkYmRmOWRiOGM2NWI2MThiNWZjNjBjZjhjIiwiY2lwaGVycGFyYW1zIjp7Iml2IjoiZGVhNTg4MWE0NTcwZmU0ZTJkN2IxMmYyZWE4YWUzMGQifSwiY2lwaGVyIjoiYWVzLTEyOC1jdHIiLCJrZGYiOiJzY3J5cHQiLCJrZGZwYXJhbXMiOnsiZGtsZW4iOjMyLCJzYWx0IjoiNTFhMWIwYjEwY2FhZTg3MGQzMWE5OGMzNGE2ZTFkYTAzZGYyZDNjNWNiNTQyYzdlYTllN2U3YzQ3NjJlMWM1OCIsIm4iOjgxOTIsInIiOjgsInAiOjF9LCJtYWMiOiIxNzY2YTA4Mjk2NjAwNTgzMWI5NDYxNGUxYjkyMGRhYmEyODI0NDIyNTEwZGNiODY4ODE3Njg1MjJjYTNkNTVhIn19",
+    "address": "0xAC5e5336F96E63950fDcb40B1aBD13B4224AEb4F",
+    "members": [
+      "0x0Cc59Ed03B3e763c02d54D695FFE353055f1502D",
+      "0x3F5084d3D4692cf19b0C98A9b22De614e49e1470",
+      "0xEF0186B8eDA17BE7D1230eeB8389fA85e157E1fb",
+      "0xedDdb60EF5E90Fb09707246DF193a55Df3564c9d",
+      "0xd5e454462b3Fd98b85640977D7a5C783CA162228"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 50000
+  },
+  "0xB9211793eFfA1c3E2a48d76F891E791888eda9b2": {
+    "name": "C-Labs(14) eyJ2ZXJzaW9uIjozLCJpZCI6ImUyNTQ2ZDhhLTBjYmItNGIzYy1iYzQ5LTRmMjdjNmY1NjJjYiIsImFkZHJlc3MiOiJiOTIxMTc5M2VmZmExYzNlMmE0OGQ3NmY4OTFlNzkxODg4ZWRhOWIyIiwiY3J5cHRvIjp7ImNpcGhlcnRleHQiOiJjYmNkNGMxYWU2YTgzMGFlNmUzYTAwODExNGM5YmFjYjc3MDYzNTQ2NDVkNTA1ZjYwYjczZmE4ZGFiNzUzNTNhIiwiY2lwaGVycGFyYW1zIjp7Iml2IjoiOWMwODRhMTkzYTQ0OTAxMGQzNWVmY2QxZDdhYzk3MDAifSwiY2lwaGVyIjoiYWVzLTEyOC1jdHIiLCJrZGYiOiJzY3J5cHQiLCJrZGZwYXJhbXMiOnsiZGtsZW4iOjMyLCJzYWx0IjoiYmQxNWU0OWQ4N2I2ZTQ3MmMxYjYyNDg3MTdhNGJiMWUxNTM1ZTg1NDgyZjkzNWMwMWU5NGI4NDk0NTgxNDRiNyIsIm4iOjgxOTIsInIiOjgsInAiOjF9LCJtYWMiOiI5ZGIwMTdmOWJiMTNkMGU0NTYzMWQxNTQ0NTc1NmJlYWVjZmUxZWExMThkMTZjMGFhYWZmNGMyMjhhYTNiYzE1In19",
+    "address": "0xB9211793eFfA1c3E2a48d76F891E791888eda9b2",
+    "members": [
+      "0xA6E67f19616Ff297292BF4BcF4fb99Ecc9AfCB4d",
+      "0xE9aE759ef8b31aA5f3566C95a19D09faaBbD402C",
+      "0x121EBb2b928a6AC306db9ED3A32Be54A42de4886",
+      "0xFB91E1E8751bBB93fcfa348d1D6A0f4C09c38E35",
+      "0x403346001329dA8308550d2BbB22474bdBDb8629"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 100000
+  },
+  "0x1DBe73b0480058106798Adda62E25d5279233c1B": {
+    "name": "wotrust",
+    "address": "0x1DBe73b0480058106798Adda62E25d5279233c1B",
+    "members": [
+      "0xf5B15312E6407988372d9280d064DAa0248181Be",
+      "0x687d149244d58fEFDcC321B592B994472Ba0080F"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 49623
+  },
+  "0xe89897510bfb2fc0647325fB6D580594c061aCbF": {
+    "name": "euclid",
+    "address": "0xe89897510bfb2fc0647325fB6D580594c061aCbF",
+    "members": [
+      "0xD0604078265249629759F6f342cc5d19461b2c8B",
+      "0x9bD00f8dC847044Fbe4c7e1c277DAe5742217361"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 52248
+  },
+  "0xE7C85A3F18d18d40d713041A69D4795f36339f7D": {
+    "name": "dsrv labs - WellDoneStake.com",
+    "address": "0xE7C85A3F18d18d40d713041A69D4795f36339f7D",
+    "members": [
+      "0x43c8CC9884d8e2Ea870c33bdC25F495c25f269DF",
+      "0xe4cc726ED04933C8af4eb88983dD70d65aCc5285"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 51577
+  },
+  "0x035eF01395e2cC1219482f0542a05B627FAC36B6": {
+    "name": "Chainlayer",
+    "address": "0x035eF01395e2cC1219482f0542a05B627FAC36B6",
+    "members": [
+      "0x775a5C899Fd4A7CDD54e9f41738087748CfcB953",
+      "0xa27D6BaA6187ec95B961c259194c5b4763D20520"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 52580
+  },
+  "0x675e639e4e19a22204BC1f5EA006e948413f796b": {
+    "name": "goods-and-services",
+    "address": "0x675e639e4e19a22204BC1f5EA006e948413f796b",
+    "members": [
+      "0xA250b8d79653De86Cf7431Ff0719dc77Fe08Ccfb"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 34962
+  },
+  "0xd99bedef76c9Caa7eC0Cfdaa79c1b9330Bb02061": {
+    "name": "TDlabs",
+    "address": "0xd99bedef76c9Caa7eC0Cfdaa79c1b9330Bb02061",
+    "members": [
+      "0xc9D9a8dbBC238CE17134dC9C12447dCC137630a7",
+      "0x95F72706F24d4862a454141FD63C8Da59a7682DA"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 46696
+  },
+  "0x412f2910970F81e49Af9B46067d3fD4D7a281679": {
+    "name": "Census Group",
+    "address": "0x412f2910970F81e49Af9B46067d3fD4D7a281679",
+    "members": [
+      "0x91f5f037efdB97d0C7a840276837d4226b91A258",
+      "0x0682c9eD752e8a8bBB56bC33D83DD65379305F52"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 53593
+  },
+  "0x9f79acEa4994cC09F31f2FC87105aA619Fa22020": {
+    "name": "mariposa-group",
+    "address": "0x9f79acEa4994cC09F31f2FC87105aA619Fa22020",
+    "members": [
+      "0xc8c8E28dbe45a95B70D3f19B9A225b3531642a79"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 44634
+  },
+  "0xC1C8432a07183e96043d00cE2A60d637CB509590": {
+    "name": "DY",
+    "address": "0xC1C8432a07183e96043d00cE2A60d637CB509590",
+    "members": [
+      "0xee9D99071e541e19eae7F1063539EF5B39199Bd6",
+      "0x1c77235a721A6A9C0FE6A9561311aDf5Ebe1a6E6"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 49511
+  },
+  "0x097623488573f87a02bbf292f9E78c0c751752e1": {
+    "name": "nonce",
+    "address": "0x097623488573f87a02bbf292f9E78c0c751752e1",
+    "members": [
+      "0xC3a0aC447e6E2Ba795CBdd8A3648Cb2779203EA4"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 38814
+  },
+  "0xBFEA1fC9870ee47C517faf53dA39edD9cb2142FA": {
+    "name": "Zanshin-Dojo",
+    "address": "0xBFEA1fC9870ee47C517faf53dA39edD9cb2142FA",
+    "members": [
+      "0x48CEDc58B10af13d688631bc3CB78a05b8A6E56a"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 46833
+  },
+  "0x41716BCF7C9A97179a7A276B153A7563e5F777EB": {
+    "name": "DeeLow",
+    "address": "0x41716BCF7C9A97179a7A276B153A7563e5F777EB",
+    "members": [
+      "0x608fE2DbE23917F523e157FE7D8044243417A1E8",
+      "0x0Bb7546E79dC7BFa4F5B1359b47a3BE906d4337c"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 56043
+  },
+  "0x6D289a49d8e3FB5Dc8c22bE2648c57FcBB7E7eD2": {
+    "name": "FOODFORTHOUGHT",
+    "address": "0x6D289a49d8e3FB5Dc8c22bE2648c57FcBB7E7eD2",
+    "members": [
+      "0xB060351F01492a56287F0D9E07DA18116C93728f",
+      "0xEE182b5117122C823D89Ce6117600272B0d38761"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 50815
+  },
+  "0x07b5206aFEA553D49DBcFFBBBA23fCA5896cC603": {
+    "name": "moonlime",
+    "address": "0x07b5206aFEA553D49DBcFFBBBA23fCA5896cC603",
+    "members": [
+      "0x9880279fA2a2170B9F3D89181249A34a291e6547"
+    ],
+    "commission": 0.1,
+    "affiliates": [
+      "0xA6183b0723Ba73868d81A097591B3e5E1665BaE0"
+    ],
+    "votes": 36829
+  },
+  "0x506423aB317013b94d1DDb2AdC15CdA413096987": {
+    "name": "team_tudou",
+    "address": "0x506423aB317013b94d1DDb2AdC15CdA413096987",
+    "members": [
+      "0x19F79Eaa92D20E0a2E7BF24E32fffc5a1239bC8C"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 40646
+  },
+  "0xD4e068fB4467816C768fa3460ce9d5Ae5642dE37": {
+    "name": "steakvalley",
+    "address": "0xD4e068fB4467816C768fa3460ce9d5Ae5642dE37",
+    "members": [
+      "0xB84FA68Db82aF1BfCBb4B876E017657AFB1DD615",
+      "0xf1c7122D670b2BFD4DBc6accf6885b1844b07221"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 35195
+  },
+  "0x4418a99aC82d042971668A78604d1baaA92B895f": {
+    "name": "celvaly",
+    "address": "0x4418a99aC82d042971668A78604d1baaA92B895f",
+    "members": [
+      "0x694fb0e26FC592984C8A310eb4FE9BcC3037cA48",
+      "0xc8b8fFa1BE4104A305c39b29eDFB22E37AcBCB2C"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 47186
+  },
+  "0x0e447c8d3369E0E95a081DDB9E4C181D56F3685E": {
+    "name": "Inotel",
+    "address": "0x0e447c8d3369E0E95a081DDB9E4C181D56F3685E",
+    "members": [
+      "0xB1bEB7832F72B27d045A9078d8ADB0a3e42B3F99"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 45658
+  },
+  "0x84599e63cdF1F592A00be4C624587e1c59FF8cA0": {
+    "name": "DokiaCapital",
+    "address": "0x84599e63cdF1F592A00be4C624587e1c59FF8cA0",
+    "members": [
+      "0x6a2bEEA75f32f2E7b264E9f25Ac970c5210E9230",
+      "0xEe80387e93E4D6D41C4BF51623Bc8A42BA55a449"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 44375
+  },
+  "0x192E049d4a4a0789Dc964E1d46C2E3CD3b825480": {
+    "name": "chainvibes-group",
+    "address": "0x192E049d4a4a0789Dc964E1d46C2E3CD3b825480",
+    "members": [
+      "0x1569C74093B9393ba5D5A684013458b1f3000185",
+      "0x64238332ba04c2d90e77e51f37fe4c2Bcb9ab3A2"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 52689
+  },
+  "0xaD67baE6526873C5a6dF80639aC16D89e627641c": {
+    "name": "UbikCapital",
+    "address": "0xaD67baE6526873C5a6dF80639aC16D89e627641c",
+    "members": [
+      "0x4f9f7FA5Db4A44A469F95115e0525f548605c7FD"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 55501
+  },
+  "0x07894441a09086351ebB5b428A5717B7d2c7C592": {
+    "name": "stablenode",
+    "address": "0x07894441a09086351ebB5b428A5717B7d2c7C592",
+    "members": [
+      "0x060b52F506579625aD73b99f1bE8D6B06259953D",
+      "0x22a38972EdE9A3B3FE87582074bC40Af909e1a29"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 46460
+  },
+  "0x6Af7F878Dc47D3cD83507b760aba82Af45C9F902": {
+    "name": "next-big-thing",
+    "address": "0x6Af7F878Dc47D3cD83507b760aba82Af45C9F902",
+    "members": [
+      "0x4500b26a6F52836510bfd013241DF203f03456F8"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 34483
+  },
+  "0x320Ba815C2d43e44e6e7e8926D7C384cB4c12EA2": {
+    "name": "Newroad_group",
+    "address": "0x320Ba815C2d43e44e6e7e8926D7C384cB4c12EA2",
+    "members": [
+      "0xb584F6a8E1196B27592E3EC69446BED1b76d52d9"
+    ],
+    "commission": 0.15,
+    "affiliates": [],
+    "votes": 30775
+  },
+  "0x73b49DA41223585a650712363BA7878Ed60a964d": {
+    "name": "Moonlet",
+    "address": "0x73b49DA41223585a650712363BA7878Ed60a964d",
+    "members": [
+      "0xd6F05649c5350c20030de1dC57eD31510141F487",
+      "0x9af25cfbe1c7F3a4fFaFa9c99cF4598a7c48dd5A"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 46809
+  },
+  "0xEa6F11e720cA72Af1D8A94FfF813617eE21bE08e": {
+    "name": "cryptiumlabs",
+    "address": "0xEa6F11e720cA72Af1D8A94FfF813617eE21bE08e",
+    "members": [
+      "0x0b3654a18513C76EeE3a576241f328A3514F26E8"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 47056
+  },
+  "0x7f53F21F0fd99983fC1d0d527AC5fF6feD52B9a0": {
+    "name": "syncnode_group",
+    "address": "0x7f53F21F0fd99983fC1d0d527AC5fF6feD52B9a0",
+    "members": [
+      "0x92fb67ace261e016678Cd221972F21f5c03D781a"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 46984
+  },
+  "0xC1B1230Bbf9590232E6d2D28c4c1c418a32339ef": {
+    "name": "TheLoop",
+    "address": "0xC1B1230Bbf9590232E6d2D28c4c1c418a32339ef",
+    "members": [
+      "0x255F0De37b99d52Ad4189D06AB4f63A748b2D235"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 46139
+  },
+  "0x5eEE762a960560Cb6a625F280e53F92d93EC9b78": {
+    "name": "EZ_Group",
+    "address": "0x5eEE762a960560Cb6a625F280e53F92d93EC9b78",
+    "members": [
+      "0x5a4b9e7BF6ff475C52e372025C5B161014f5f70D"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 47100
+  },
+  "0xcCCD3999D5b421F906c4a35c0c95bcD533e1CFBb": {
+    "name": "onenode",
+    "address": "0xcCCD3999D5b421F906c4a35c0c95bcD533e1CFBb",
+    "members": [
+      "0xe81ece7F8F962bD1076F1134D1FD523d64E43702",
+      "0x09d677AA4e955e3b7994D711dc4634cBe5F8032c"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 46996
+  },
+  "0x2947EA31ab65B1FEE886DC6c113F79B222c804B7": {
+    "name": "ryabina-group",
+    "address": "0x2947EA31ab65B1FEE886DC6c113F79B222c804B7",
+    "members": [
+      "0x81a9CC4103e2c66a652b2C17BaaF134FdaeAfCA9",
+      "0x1a32B41Bcc66da304314d0DE414C982CBa2c8415"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 44282
+  },
+  "0x5279bd79792c588e2553C56580c3aB058809E67a": {
+    "name": "Chainode",
+    "address": "0x5279bd79792c588e2553C56580c3aB058809E67a",
+    "members": [
+      "0x2C8a412026454d1e56B9687dD88D4A6080C10e87"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 25384
+  },
+  "0xbf453Cc91A56da43FE6EcB834679cB4522a8889D": {
+    "name": "happycelo-vg",
+    "address": "0xbf453Cc91A56da43FE6EcB834679cB4522a8889D",
+    "members": [
+      "0xE2b8269e836C0f2ede96802405410203fb0de3a6",
+      "0xdB7AfFEC701C39B21364f0D2710FA058D29FB06f"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 60090
+  },
+  "0x3Cb7762C05231f62c5703849a685F0817073E2f2": {
+    "name": "sharpcelo-group",
+    "address": "0x3Cb7762C05231f62c5703849a685F0817073E2f2",
+    "members": [
+      "0xEDf3DACB0FDA9A955956CfC7f833EA4DbE26c4F2"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 34689
+  },
+  "0x49c3C6A9B0c17aC32169FFc45998aA80029128B3": {
+    "name": "kytzu_group",
+    "address": "0x49c3C6A9B0c17aC32169FFc45998aA80029128B3",
+    "members": [
+      "0xe820238dc7B75B7602DaFC7ffcCd35C9EF5e2fdF"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 46711
+  },
+  "0x4E0585B243c3b434C846b050354Cf216e76d1ee4": {
+    "name": "celoisitmeyourelookingfor",
+    "address": "0x4E0585B243c3b434C846b050354Cf216e76d1ee4",
+    "members": [
+      "0x89a2bb2f22e84AeDf0C4152B9Ef80cC2F015Df51"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 38221
+  },
+  "0x3521a14aae3a4FaC3C6D0D6Ceb8642cDd21323A2": {
+    "name": "Blockdaemon",
+    "address": "0x3521a14aae3a4FaC3C6D0D6Ceb8642cDd21323A2",
+    "members": [
+      "0xF327386EF9D6Be057d1C720Fef633938743660F3",
+      "0x813eA48DBa2912060Ce24f17E39A06efCb564E4a"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 36556
+  },
+  "0x93c110Dc9812dc075C1541b2c5D1030B2Ad6C293": {
+    "name": "bitcat-group",
+    "address": "0x93c110Dc9812dc075C1541b2c5D1030B2Ad6C293",
+    "members": [
+      "0xcBeBE96Dd4811243e23B1f7B43d7c3266C59af2f",
+      "0x116a647Ce0E9A012099508f285a7735F86e333A4"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 36887
+  },
+  "0x257105A729ceDB5701dad1E0073aE751d0b788A1": {
+    "name": "Wetez",
+    "address": "0x257105A729ceDB5701dad1E0073aE751d0b788A1",
+    "members": [
+      "0x0537d935b50124B3bb9277d0356ce45400579c57"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 28487
+  },
+  "0x3De7ddDd7ea601097c78E874e914550C9CEB6950": {
+    "name": "stella",
+    "address": "0x3De7ddDd7ea601097c78E874e914550C9CEB6950",
+    "members": [
+      "0x2EE2a7FD94a31CF1e6Db3875F4fd3d961b15de17",
+      "0x1F0678F5279c12AA1b430C3f0d45996C5Fa64174"
+    ],
+    "commission": 0,
+    "affiliates": [],
+    "votes": 46970
+  },
+  "0x028fad6c3142681c21517CD4414a6be4438F2556": {
+    "name": "sparkpool",
+    "address": "0x028fad6c3142681c21517CD4414a6be4438F2556",
+    "members": [
+      "0xE32C4fc7e75091197E7Ce24f0B1257eA858c6A0D"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 46461
+  },
+  "0x5862Cf5a76efB0315D34dE733e0300279add5d52": {
+    "name": "Ilinca",
+    "address": "0x5862Cf5a76efB0315D34dE733e0300279add5d52",
+    "members": [
+      "0x0Ab74005A6017533D2f38F74Bd029d18426BDA0B"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 25407
+  },
+  "0x8CC0160E1b17fb885cb918021621820642D87797": {
+    "name": "Simply Validators",
+    "address": "0x8CC0160E1b17fb885cb918021621820642D87797",
+    "members": [
+      "0xF3eE14DfbBbB7F0Ef1eF787BE39BF4814741e300"
+    ],
+    "commission": 0.1,
+    "affiliates": [
+      "0x614c8320B8D435A6a58cbF1348E9d9EF2EE511bB"
+    ],
+    "votes": 45823
+  },
+  "0x8b5B77c229E405C33C7f99aCBFb70B1f52c17462": {
+    "name": "maugli_vg",
+    "address": "0x8b5B77c229E405C33C7f99aCBFb70B1f52c17462",
+    "members": [
+      "0x65c5BF635E57D6791a5a81FD64C186fc6b43f459"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 43780
+  },
+  "0x35537e972e63a72E6dCBD93d092110aDee296cE5": {
+    "name": "ICE_COLD_g",
+    "address": "0x35537e972e63a72E6dCBD93d092110aDee296cE5",
+    "members": [
+      "0x0e5F835Af9f0C32bD48B6540207844dd08Bca3E9"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 1
+  },
+  "0x648d9E9097E43234553058e5e04DcD68aF8AB8b0": {
+    "name": "war-group",
+    "address": "0x648d9E9097E43234553058e5e04DcD68aF8AB8b0",
+    "members": [
+      "0x87f394E0DeAbB94D844aE62fF2AEA730F75bD33D",
+      "0xdf91277af0A1b1Ee6BD505D37B135cb4398D69a9"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 46353
+  },
+  "0x4DBDa5f6d756B6288AA7A8be0d45A1644465C166": {
+    "name": "equipage-roronoa-zoro",
+    "address": "0x4DBDa5f6d756B6288AA7A8be0d45A1644465C166",
+    "members": [
+      "0x7bF109E20Bae23c8a68C3a975C9e3D7bEa941658",
+      "0x2b606745ee06F29ecf32Fc571e5a0EB973de725b"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 57126
+  },
+  "0x3216695f7A483f1275C419bB0d914412509821A0": {
+    "name": "les_mugiwaras",
+    "address": "0x3216695f7A483f1275C419bB0d914412509821A0",
+    "members": [
+      "0xe193d7CCB6D5644bfF9C9bf41FF1e62765B382E8",
+      "0x1C842256f84DfA52De53577f1b046E120ce12c08"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 50829
+  },
+  "0xc5636B98Fd6ddfF3a7bb239E9729D75338E9a61f": {
+    "name": "Bison Trails Group",
+    "address": "0xc5636B98Fd6ddfF3a7bb239E9729D75338E9a61f",
+    "members": [
+      "0xDbc52f9E934145E2e3172aEAD59303328BBAd2D1",
+      "0xcD008b4F5dAEAc599e654D4e9711046A7C20b627"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 56606
+  },
+  "0xa23049064DdC56b436BB95f6B1512C553AB61D22": {
+    "name": "cnstnt.xyz/group",
+    "address": "0xa23049064DdC56b436BB95f6B1512C553AB61D22",
+    "members": [
+      "0x9A4B4f0469E5A871A27cc9451cE69A6cF769d757"
+    ],
+    "commission": 0,
+    "affiliates": [],
+    "votes": 45494
+  },
+  "0x95785ce0Ca05F23484342Ca3c2337d7660b68d36": {
+    "name": "projecttent-celo",
+    "address": "0x95785ce0Ca05F23484342Ca3c2337d7660b68d36",
+    "members": [
+      "0x0BCDF73c45D99F33D1d8354980d7ca73C4cF72db"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 46771
+  },
+  "0x6AC1498C9aE594361E0D900769D9abff5B1217d8": {
+    "name": "a16z",
+    "address": "0x6AC1498C9aE594361E0D900769D9abff5B1217d8",
+    "members": [
+      "0x3dF5F6EF8095ED76338F8Ff94203a5b42fCAd62F"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 38241
+  },
+  "0x818c54FE6Ab2CEc008BA64A7Ec249F60b0c37A48": {
+    "name": "Alive29",
+    "address": "0x818c54FE6Ab2CEc008BA64A7Ec249F60b0c37A48",
+    "members": [
+      "0x2fBaaF12676191eAb6BF9D92e84eaBf11f303d7f"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 46047
+  },
+  "0x208767B8d773aec8Fc56Ab0345809b7fe56344De": {
+    "name": "GRom81",
+    "address": "0x208767B8d773aec8Fc56Ab0345809b7fe56344De",
+    "members": [
+      "0x362f0dd270E96A8aB333c4283541FB15DC817126"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 39657
+  },
+  "0xCa21a04402913ad8a0c9fd05c48E7C5865b75AdE": {
+    "name": "Figment Networks Group",
+    "address": "0xCa21a04402913ad8a0c9fd05c48E7C5865b75AdE",
+    "members": [
+      "0x61D7E2d39B924744FEbC65d141f30E9f644Bd286",
+      "0xF4d933C7c3Ad8D9038B0303E7124945439123185"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 43991
+  },
+  "0x95B664bEFD3DE2de8E8BDf1b1313aAE02Cc24d5B": {
+    "name": "yourcodesucks",
+    "address": "0x95B664bEFD3DE2de8E8BDf1b1313aAE02Cc24d5B",
+    "members": [
+      "0xfB92c612Be9c9758D7111daA07954Eb0455d224B"
+    ],
+    "commission": 0,
+    "affiliates": [],
+    "votes": 34815
+  },
+  "0x44EDD5027F894058cFB4B519beB04F247336bc22": {
+    "name": "Nodeasy",
+    "address": "0x44EDD5027F894058cFB4B519beB04F247336bc22",
+    "members": [
+      "0x453f92064cD11cFc185b058757Fd5aB23F98b978"
+    ],
+    "commission": 0.01,
+    "affiliates": [],
+    "votes": 28705
+  },
+  "0x28C9c08659984625584e8dF09E119b4D157F86Aa": {
+    "name": "zbx001_group",
+    "address": "0x28C9c08659984625584e8dF09E119b4D157F86Aa",
+    "members": [
+      "0x30fD0740B4a6dFa31924982D377EE634B86d7a95"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 40808
+  },
+  "0x96B473B7A71F1a3804Ad306aF4f07F86c796efF5": {
+    "name": "Staking Fund",
+    "address": "0x96B473B7A71F1a3804Ad306aF4f07F86c796efF5",
+    "members": [
+      "0x9913E776Ed11E9247ef89b4e8B2B7c062fAA5281",
+      "0xC79f79610aAa6F4f88176b06D3E45684f38C43Ea"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 43492
+  },
+  "0xFf0559D9062650213623968d2bD4E25f8705910c": {
+    "name": "AG",
+    "address": "0xFf0559D9062650213623968d2bD4E25f8705910c",
+    "members": [
+      "0xeA6a71634F7228798Ec8AC6395525a632Ec4945e"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 81109
+  },
+  "0xbA4d18be33B5D5f5a80fBa1206c3e82944665d76": {
+    "name": "NGA_group",
+    "address": "0xbA4d18be33B5D5f5a80fBa1206c3e82944665d76",
+    "members": [
+      "0x9f85BAefB7942F8b6D03C28AF32d09756830c1e8"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 24281
+  },
+  "0xe5DE9f2d1535D5b2CF8D0BA91d1F92C475f88a3b": {
+    "name": "huglester01",
+    "address": "0xe5DE9f2d1535D5b2CF8D0BA91d1F92C475f88a3b",
+    "members": [
+      "0x4a36b1EeB0178c9948cFFb183a2333E98ebB888d"
+    ],
+    "commission": 0.1,
+    "affiliates": [
+      "0x505e5244be79e3C01d4d8CEA61C0592c09a5ec34"
+    ],
+    "votes": 35789
+  },
+  "0xE609163306c42d60080C2C87e80881c4dc52E115": {
+    "name": "YYYYYYYYYYYYY",
+    "address": "0xE609163306c42d60080C2C87e80881c4dc52E115",
+    "members": [
+      "0xeC4e104bd412aAeA47C4aE753A8b3A194E9939Ac"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 24059
+  },
+  "0x6F46d495A492A212E330D20189a0656cf072836A": {
+    "name": "stakery",
+    "address": "0x6F46d495A492A212E330D20189a0656cf072836A",
+    "members": [
+      "0xc6034975ee23bb19685bFFD3c4e818e964E0D7C7"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 43496
+  },
+  "0xdb904be629d8D064238F65Cc04e95166A36d9357": {
+    "name": "bantham-group",
+    "address": "0xdb904be629d8D064238F65Cc04e95166A36d9357",
+    "members": [
+      "0xcf5d9C9514e7217A19cD975CECC0257C9b69Db1B"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 30969
+  },
+  "0x7b8CE1EFC66FB0730b95436d66D89A5B0888D656": {
+    "name": "witval",
+    "address": "0x7b8CE1EFC66FB0730b95436d66D89A5B0888D656",
+    "members": [
+      "0xAF8911392621C7881F4EF1A83021c651e0656f2a"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 31612
+  },
+  "0x1B67145Ecb99345AA619E8bC4EE67394F8334D6f": {
+    "name": "POS Bakerz",
+    "address": "0x1B67145Ecb99345AA619E8bC4EE67394F8334D6f",
+    "members": [
+      "0x4bB62dFd16fbD3D267E3f2d6f37F3b41401c6E27"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 41323
+  },
+  "0x9abD6739153D95512D0d68eC0960d296E2F174Bc": {
+    "name": "chorusone-group",
+    "address": "0x9abD6739153D95512D0d68eC0960d296E2F174Bc",
+    "members": [
+      "0x575240f049AEa7bC783F60Bebd7fCb5584a54B4A"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 31722
+  },
+  "0x236D579CeC46d0BCC9d6fc4223441c3DD2742B5B": {
+    "name": "Bambarello",
+    "address": "0x236D579CeC46d0BCC9d6fc4223441c3DD2742B5B",
+    "members": [
+      "0x1985b61750657AC41656A67565950B6B48BaC809"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 36476
+  },
+  "0xBCD25468E4D433Ac442b87f32B37B39678BF7077": {
+    "name": "Qoor.io",
+    "address": "0xBCD25468E4D433Ac442b87f32B37B39678BF7077",
+    "members": [
+      "0xe67a310436b8a3A23A994E4A0B29e8D82721bE7c"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 51017
+  },
+  "0x3b63aE3002C0faB6e1481d4A33ec89650872b3d5": {
+    "name": "gunray",
+    "address": "0x3b63aE3002C0faB6e1481d4A33ec89650872b3d5",
+    "members": [
+      "0xE4dc20758DF2b3Dab5dbBFd3239cCdc0b9682206"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 34709
+  },
+  "0x69f52B7F0492889e18285f516B71cBaA1b67981f": {
+    "name": "StakesStoneGroup",
+    "address": "0x69f52B7F0492889e18285f516B71cBaA1b67981f",
+    "members": [
+      "0xB7b3C854b00D65208e410a5d16eB54f58DBebBC7"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 45083
+  },
+  "0x8792e294df1D75eAA215A2E6E18E9b28cfc48D07": {
+    "name": "IntegralOps-Group",
+    "address": "0x8792e294df1D75eAA215A2E6E18E9b28cfc48D07",
+    "members": [
+      "0xF7084F320f3779Dd2a92A2f58d23Abb35F8a9C15"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 36255
+  },
+  "0xD5c181972763b082D4d6ca84662878674C0bD35c": {
+    "name": "tessellated-geometry-group",
+    "address": "0xD5c181972763b082D4d6ca84662878674C0bD35c",
+    "members": [
+      "0x0c561cFe5616e01467BA9792f0Bc320314c7B1c6",
+      "0x8BC15E03165B81536e1A7556261e500E5E1726Fb"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 47312
+  },
+  "0xf75DaAE125083FCa31583FeF2D0A84E0344a1534": {
+    "name": "happy-new-year-group",
+    "address": "0xf75DaAE125083FCa31583FeF2D0A84E0344a1534",
+    "members": [
+      "0xA866efed4E0Af66A1fbF2c0cBc3e39197cBC5B01"
+    ],
+    "commission": 0.5,
+    "affiliates": [],
+    "votes": 32261
+  },
+  "0x9dba468122b12Cd04BF4828c57F67a87Fe03BBf0": {
+    "name": "Convolution",
+    "address": "0x9dba468122b12Cd04BF4828c57F67a87Fe03BBf0",
+    "members": [
+      "0x4A47f329f9429EE621e6b359e46fF3B5Ac79E5E7"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 30114
+  },
+  "0x94bEfc20CA6bB6b21A6E6D3757B6F2335675f65C": {
+    "name": "CHUIYUN",
+    "address": "0x94bEfc20CA6bB6b21A6E6D3757B6F2335675f65C",
+    "members": [
+      "0x673eC125d05F8aa71F735407a87a14836D775512"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 38403
+  },
+  "0xfFAC3DcF14DC8e678204E2388031d4cc3e366261": {
+    "name": "Celo.Bi23",
+    "address": "0xfFAC3DcF14DC8e678204E2388031d4cc3e366261",
+    "members": [
+      "0xf823E8A4BA6adddb02E97B5b8886D18e41b2723e"
+    ],
+    "commission": 1e-14,
+    "affiliates": [],
+    "votes": 35702
+  },
+  "0x7A914A1B9A025eCA6a2C06936C94101184741ea2": {
+    "name": "NeNa",
+    "address": "0x7A914A1B9A025eCA6a2C06936C94101184741ea2",
+    "members": [
+      "0x6a2998527cd699982364C9399d17b63C6CA22a41",
+      "0xBE1c5d41249b89590ADbb89c037947074461d9E1"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 1
+  },
+  "0xC9D6Fe14D8e93269bd3487D1d1a7693ef60001E3": {
+    "name": "YJQ-GROUP",
+    "address": "0xC9D6Fe14D8e93269bd3487D1d1a7693ef60001E3",
+    "members": [
+      "0x66D4902810a03f45015998A8e92Be8E2Fa49c05A"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 34204
+  },
+  "0xE4c1Da47b33ABd25578Becb8F90d2480D9575f89": {
+    "name": "Masternode24-Group",
+    "address": "0xE4c1Da47b33ABd25578Becb8F90d2480D9575f89",
+    "members": [
+      "0xf4691164b53141bD4082592c0E979689a0486500"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 34540
+  },
+  "0x7Cb5a8850f736c2Bb6A5431dD6b6636722D563aB": {
+    "name": "Wanderer",
+    "address": "0x7Cb5a8850f736c2Bb6A5431dD6b6636722D563aB",
+    "members": [
+      "0xB1782C590339Bcce5677960ceEA1b5F5b5fBE566"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 1
+  },
+  "0xC566B9f9b5551588b93a8Bc00d34d2123D318Ce3": {
+    "name": "Chainflow-Validator-Group",
+    "address": "0xC566B9f9b5551588b93a8Bc00d34d2123D318Ce3",
+    "members": [
+      "0xCf08368E0aa6D6017A2FedE771EA72abb555F266"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 26124
+  },
+  "0xa87C05C4598FcF6d7Bb9F9e41EBaa05c2cb46AbD": {
+    "name": "CypherCore",
+    "address": "0xa87C05C4598FcF6d7Bb9F9e41EBaa05c2cb46AbD",
+    "members": [
+      "0x5582268E275fC3407f92Fa80dD3F0d05904a723A"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 44479
+  },
+  "0xcF946b26fFF0c2c1d3DA93B7647034B90b5fCF99": {
+    "name": "SlavaMo_group",
+    "address": "0xcF946b26fFF0c2c1d3DA93B7647034B90b5fCF99",
+    "members": [
+      "0xe49515934d5eB7e8A2DF1F6b00a819de9938f2C6"
+    ],
+    "commission": 0.1,
+    "affiliates": [],
+    "votes": 33942
+  }
+}

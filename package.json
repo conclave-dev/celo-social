@@ -8,12 +8,14 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.0",
+    "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.25",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-router-dom": "^5.1.3",
     "@types/reactstrap": "^8.4.0",
     "bootstrap": "^4.4.1",
+    "lodash": "^4.17.15",
     "metismenujs": "^1.1.0",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
@@ -31,7 +33,8 @@
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.0",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier-eslint": "^9.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,11 +54,14 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "airbnb-typescript"
+      "airbnb-typescript",
+      "prettier-eslint"
     ],
     "rules": {
       "react/jsx-one-expression-per-line": 0,
-      "object-curly-newline": 0
+      "object-curly-newline": 0,
+      "react/prop-types": 0,
+      "no-unused-vars": 2
     }
   },
   "homepage": "https://github.com/stella-zone/celo-social-network#readme",
