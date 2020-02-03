@@ -1,8 +1,4 @@
 {
-  "extends": [
-    "tslint-microsoft-contrib/recommended",
-    "tslint-config-prettier"
-  ],
   "rules": {
     "mocha-no-side-effect-code": false,
     "missing-jsdoc": false,
