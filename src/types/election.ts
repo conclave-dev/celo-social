@@ -1,34 +1,20 @@
-export interface ElectionSummary {
+export interface Summary {
   votes: number;
   earnings: number;
-  score: number;
-}
-
-export interface ElectionValidator {
-  name: string;
-  authorizedSigners: { [key: string]: string };
-  wallet: string;
-  metadataURL: string;
-  dataEncryptionKey: string;
-  score: number;
   uptime: number;
-  earnings: number;
-  groupAddress: string;
-  GetValidatorResponse;
 }
 
-export interface ElectionGroup {
-  name: string;
-  votes: number;
-  members: string[];
-  commission: number;
+export interface Validator {
   address: string;
+  groupAddress: string;
+  signerIndex: number;
+  score: number;
+  name: string;
 }
 
-export interface GetValidatorResponse {
-  ecdsaPublicKey: string;
-  blsPublicKey: string;
-  groupAddress: string;
-  signerAddress: string;
-  score: number;
+export interface Group {
+  name: string;
+  address: string;
+  members: string[];
+  votes: number;
 }

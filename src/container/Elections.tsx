@@ -1,22 +1,15 @@
-import React, { memo, useReducer, useEffect } from 'react';
-import { Promise } from 'bluebird';
+import React, { Suspense, memo, useReducer, useEffect } from 'react';
+import { reduce } from 'lodash';
 import Elections from '../presentational/Content/Elections';
 import { getBlockNumber } from '../data/fetch/eth';
 import {
-  getCurrentValidatorSigners,
-  getGroupVoteStatus,
-} from '../data/fetch/election';
-import { getValidator, getValidatorGroup } from '../data/fetch/validators';
-import {
-  validatorSignerToAccount,
-  getAccountSummary,
-} from '../data/fetch/accounts';
-import { GetValidatorResponse } from '../types/election';
+  getElectedValidatorsOverview,
+  getValidatorGroupsOverviewByAccounts,
+} from '../data/fetch/validators';
 
 const types = {
   INIT: 'INIT',
-  GET_ELECTED_VALIDATORS: 'GET_ELECTED_VALIDATORS',
-  GET_ELECTED_GROUPS: 'GET_ELECTED_GROUPS',
+  GET_ELECTED: 'GET_ELECTED',
 };
 
 const initialState = {
@@ -24,11 +17,9 @@ const initialState = {
   block: 0,
   votes: 0,
   earnings: 0,
-  score: 0,
-  electedValidators: {},
-  electedValidatorIds: [],
+  uptime: 0,
+  electedValidators: [],
   electedGroups: {},
-  electedGroupIds: [],
 };
 
 const reducer = (state, { type, payload }) => {
@@ -39,140 +30,88 @@ const reducer = (state, { type, payload }) => {
         epoch: Math.ceil(payload / 720),
         block: payload,
       };
-    case types.GET_ELECTED_VALIDATORS: {
-      const { address, ...remainingValidator } = payload.validator;
-
+    case types.GET_ELECTED:
       return {
         ...state,
-        electedValidators: {
-          ...state.electedValidators,
-          [address]: {
-            ...remainingValidator,
-          },
-        },
-        electedValidatorIds: [...state.electedValidatorIds, address],
+        electedValidators: payload.validators,
+        electedGroups: payload.groups,
+        votes: payload.votes,
       };
-    }
-    case types.GET_ELECTED_GROUPS: {
-      const { address, ...remainingGroup } = payload.group;
-
-      return {
-        ...state,
-        electedGroups: {
-          ...state.electedGroups,
-          [address]: {
-            ...remainingGroup,
-          },
-        },
-        electedGroupIds: [...state.electedGroupIds, address],
-        votes: state.votes + remainingGroup.votes,
-      };
-    }
     default:
       return;
   }
 };
 
-const ElectionsContainer = memo(() => {
+const ElectionsContainer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const setInitialState = async () => {
+  const setInitialState = async () => (
     // TODO: Subscribe to new block header events
     dispatch({
       type: types.INIT,
       payload: (await getBlockNumber()).number,
-    });
-  };
+    })
+  );
 
-  const getElectedValidators = async () => {
+  const getElected = async () => {
     try {
-      const signers = (await getCurrentValidatorSigners(state.block)).addresses;
-
-      await Promise.each(signers, async (signer) => {
-        const validatorAddress = (await validatorSignerToAccount(state.block, signer))
-          .address;
-        const validator: GetValidatorResponse = await getValidator(
-          state.block, 
-          validatorAddress,
-        );
-        const validatorSummary = await getAccountSummary(state.block, validatorAddress);
-
-        if (!state.electedGroupIds.includes(validator.groupAddress)) {
-          const validatorGroup = await getValidatorGroup(
-            state.block, 
-            validator.groupAddress,
-          );
-          const groupVoteStatus = await getGroupVoteStatus(
-            state.block,
-            validator.groupAddress,
-          );
-          const group = {
-            ...validatorGroup,
-            ...groupVoteStatus,
-          }
-
-          dispatch({
-            type: types.GET_ELECTED_GROUPS,
-            payload: {
-              group,
-            },
-          });
-        }
-
-        return dispatch({
-          type: types.GET_ELECTED_VALIDATORS,
-          payload: {
-            validator: {
-              address: validatorAddress,
-              ...validator,
-              ...validatorSummary,
-            },
+      const { validators } = await getElectedValidatorsOverview(state.block);
+      const groupAddresses = validators.map(({ groupAddress }) => groupAddress);
+      const { validatorGroups } = await getValidatorGroupsOverviewByAccounts(
+        state.block,
+        groupAddresses,
+      );
+      const { votes, groups } = reduce(
+        validatorGroups,
+        (total, validatorGroup) => ({
+          votes: total.votes + validatorGroup.votes,
+          groups: {
+            ...total.groups,
+            [validatorGroup.address]: validatorGroup,
           },
-        });
+        }),
+        { votes: 0, groups: {} },
+      );
+
+      return dispatch({
+        type: types.GET_ELECTED,
+        payload: {
+          validators,
+          groups,
+          votes,
+        },
       });
     } catch (err) {
       console.error(err);
       throw err;
     }
-
-    // return (await Promise.reduce(signers, async (acc, signer) =>{
-    //   const validator = await validatorSignerToAccount(signer);
-    // }, {}))
   };
 
   useEffect(() => {
     if (!state.block) {
       setInitialState();
-    } else if (
-      state.block &&
-      !state.electedValidatorIds.length &&
-      !state.electedGroupIds.length
-    ) {
-      getElectedValidators();
+    } else if (state.block && !state.electedValidators.length) {
+      getElected();
     }
 
     return;
-  }, [state.block, state.electedValidatorIds]);
+  }, [state.block, state.electedValidators]);
+
+  const electionSummary = {
+    votes: state.votes,
+    earnings: state.earnings,
+    uptime: state.uptime,
+  };
 
   return (
     <Elections
       epoch={state.epoch}
       block={state.block}
-      electionSummary={{
-        votes: state.votes,
-        earnings: state.earnings,
-        score: state.score,
-      }}
-      electedValidators={{
-        byId: state.electedValidators,
-        allIds: state.electedValidatorIds,
-      }}
-      electedGroups={{
-        byId: state.electedGroups,
-        allIds: state.electedGroupIds,
-      }}
+      electionSummary={electionSummary}
+      electedValidators={state.electedValidators}
+      electedGroups={state.electedGroups}
     />
   );
-});
+};
 
-export default ElectionsContainer;
+export default memo(ElectionsContainer);

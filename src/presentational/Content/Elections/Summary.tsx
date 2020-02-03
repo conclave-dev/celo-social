@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 import fmt from '../../../utils/fmt';
-import { ElectionSummary } from '../../../types/election';
+import { Summary as SummaryType } from '../../../types/election';
 
-const Summary = memo(({ votes = 0, earnings = 0, score = 0 }: ElectionSummary) => (
+const Summary = memo(({ votes = 0, earnings = 0, uptime = 0 }: SummaryType) => (
   <Row>
     <Col xl="4" md="4">
       <Card className="bg-pattern">
@@ -33,7 +33,7 @@ const Summary = memo(({ votes = 0, earnings = 0, score = 0 }: ElectionSummary) =
           <div className="float-right">
             <i className="mdi mdi-progress-upload text-success h4 ml-3" />
           </div>
-          <h5 className="font-20 mt-0 pt-1 text-white">{`${score}%`}</h5>
+          <h5 className="font-20 mt-0 pt-1 text-white">{`${uptime}%`}</h5>
           <p className="text-muted mb-0">Uptime</p>
         </CardBody>
       </Card>
