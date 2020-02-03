@@ -12,4 +12,10 @@ const getAccountSummary = (blockNumber: number, address: string) =>
     address,
   });
 
-export { validatorSignerToAccount, getAccountSummary };
+const getMetadataURL = (blockNumber: number, address: string) =>
+  apiFetch('/accounts/getMetadataURL', {
+    opts: { blockNumber },
+    address,
+  });
+
+export { validatorSignerToAccount, getAccountSummary, getMetadataURL };

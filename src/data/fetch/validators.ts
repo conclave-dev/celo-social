@@ -1,4 +1,4 @@
-import { apiFetch, defaultOptions } from './util';
+import { apiFetch } from './util';
 
 const getValidator = (blockNumber: number, address: string) =>
   apiFetch('/validators/getValidator', {
@@ -12,4 +12,23 @@ const getValidatorGroup = (blockNumber: number, groupAddress: string) =>
     groupAddress,
   });
 
-export { getValidator, getValidatorGroup };
+const getElectedValidatorsOverview = (blockNumber: number) =>
+  apiFetch('/validators/getElectedValidatorsOverview', {
+    opts: { blockNumber },
+  });
+
+const getValidatorGroupsOverviewByAccounts = (
+  blockNumber: number,
+  groupAddresses: string[],
+) =>
+  apiFetch('/validators/getValidatorGroupsOverviewByAccounts', {
+    opts: { blockNumber },
+    groupAddresses,
+  });
+
+export {
+  getValidator,
+  getValidatorGroup,
+  getElectedValidatorsOverview,
+  getValidatorGroupsOverviewByAccounts,
+};

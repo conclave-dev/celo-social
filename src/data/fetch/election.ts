@@ -1,4 +1,4 @@
-import { apiFetch, defaultOptions } from './util';
+import { apiFetch } from './util';
 
 const getCurrentValidatorSigners = (blockNumber: number) =>
   apiFetch('/election/getCurrentValidatorSigners', {
@@ -11,4 +11,14 @@ const getGroupVoteStatus = (blockNumber: number, groupAddress: string) =>
     groupAddress,
   });
 
-export { getCurrentValidatorSigners, getGroupVoteStatus };
+const getGroupsVotedForByAccount = (blockNumber: number, address: string) =>
+  apiFetch('/election/getGroupsVotedForByAccount', {
+    opts: { blockNumber },
+    address,
+  });
+
+export {
+  getCurrentValidatorSigners,
+  getGroupVoteStatus,
+  getGroupsVotedForByAccount,
+};
