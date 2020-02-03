@@ -1,17 +1,17 @@
 import React, { memo } from 'react';
 import { Row, Col, Card, CardBody } from 'reactstrap';
-import { ElectionSummary } from '../../../types/elections';
+import { ElectionSummary } from '../../../types/election';
 
-const Summary = memo(({ totalVotes, totalFeesEarned, totalMissedSignatures }: ElectionSummary) => (
+const Summary = memo(({ votes = '0', earnings = '0', uptime = '0' }: ElectionSummary) => (
   <Row>
     <Col xl="4" md="4">
       <Card className="bg-pattern">
         <CardBody>
           <div className="float-right">
-            <i className="fas fa-vote-yea text-primary h4 ml-3" />
+            <i className="mdi mdi-vote-outline text-success h4 ml-3" />
           </div>
-          <h5 className="font-20 mt-0 pt-1">{totalVotes}</h5>
-          <p className="text-muted mb-0">Total Votes</p>
+          <h5 className="font-20 mt-0 pt-1 text-white">{votes}</h5>
+          <p className="text-muted mb-0">Votes</p>
         </CardBody>
       </Card>
     </Col>
@@ -19,10 +19,10 @@ const Summary = memo(({ totalVotes, totalFeesEarned, totalMissedSignatures }: El
       <Card className="bg-pattern">
         <CardBody>
           <div className="float-right">
-            <i className="fas fa-donate text-success h4 ml-3" />
+            <i className="mdi mdi-cash-multiple text-success h4 ml-3" />
           </div>
-          <h5 className="font-20 mt-0 pt-1">${totalFeesEarned}</h5>
-          <p className="text-muted mb-0">Total Fees Earned</p>
+          <h5 className="font-20 mt-0 pt-1 text-white">{`$${earnings}`}</h5>
+          <p className="text-muted mb-0">Earnings</p>
         </CardBody>
       </Card>
     </Col>
@@ -30,10 +30,10 @@ const Summary = memo(({ totalVotes, totalFeesEarned, totalMissedSignatures }: El
       <Card className="bg-pattern">
         <CardBody>
           <div className="float-right">
-            <i className="fas fa-file-signature text-danger h4 ml-3" />
+            <i className="mdi mdi-progress-upload text-success h4 ml-3" />
           </div>
-          <h5 className="font-20 mt-0 pt-1">{totalMissedSignatures}</h5>
-          <p className="text-muted mb-0">Total Missed Signatures</p>
+          <h5 className="font-20 mt-0 pt-1 text-white">{`${uptime}%`}</h5>
+          <p className="text-muted mb-0">Uptime</p>
         </CardBody>
       </Card>
     </Col>

@@ -29,13 +29,12 @@ const ElectionValidators = memo(
     return (
       <tr>
         <td>{votes}</td>
+        <td>{name}</td>
         <td>
           <div className="team">{groupName}</div>
         </td>
-        <td>{name}</td>
         <td>
           <span className={`badge badge-soft-${feesEarnedProps.iconColor} badge-pill`}>
-            <i className={feesEarnedProps.icon} />
             {`$${feesEarned}`}
           </span>
         </td>

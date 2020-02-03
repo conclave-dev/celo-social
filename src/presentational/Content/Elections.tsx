@@ -1,21 +1,21 @@
 import React, { memo } from 'react';
 import { map } from 'lodash';
-import { Row, Col, Card, CardBody } from 'reactstrap';
+import { Row, Col, Card, CardBody, Table } from 'reactstrap';
 import Summary from './Elections/Summary';
 import Validator from './Elections/Validator';
-import { ElectionSummary, ElectionValidator } from '../../types/elections';
+import { ElectionSummary, ElectionValidator } from '../../types/election';
 
 const Elections = memo(
   ({
-    currentEpochNumber,
-    currentBlockNumber,
-    electionSummary,
-    electedValidators,
+    epoch,
+    block,
+    validators,
+    electionValidators,
   }: {
-    currentEpochNumber: number;
-    currentBlockNumber: number;
-    electionSummary: ElectionSummary;
-    electedValidators: { [key: string]: ElectionValidator };
+    epoch: number;
+    block: number;
+    validators: any;
+    electionValidators: { [key: string]: ElectionValidator };
   }) => (
     <>
       <div className="content">
@@ -25,44 +25,47 @@ const Elections = memo(
               <Col>
                 <h4 className="page-title">Current Election</h4>
                 <ol className="breadcrumb">
-                  <li className="breadcrumb-item">Epoch {currentEpochNumber}</li>
-                  <li className="breadcrumb-item">Block {currentBlockNumber}</li>
+                  <li className="breadcrumb-item">Epoch {epoch}</li>
+                  <li className="breadcrumb-item">Block {block}</li>
                 </ol>
               </Col>
             </Row>
           </div>
-          <Summary {...electionSummary} />
+          <Summary {...validators} />
           <Row>
             <Col lg="12">
               <Card>
                 <CardBody>
                   <div className="table-responsive project-list">
-                    <table className="table project-table">
+                    <Table>
                       <thead>
                         <tr>
-                          <th scope="col">
-                            <i className="fas fa-vote-yea" />
+                          <th scope="col" style={{ width: '12.5%' }}>
+                            <i className="mdi mdi-18px mdi-vote text-white mr-2" />
                           </th>
-                          <th scope="col">
-                            <i className="fas fa-users" />
+                          <th scope="col" style={{ width: '25%' }}>
+                            <i className="mdi mdi-18px mdi-account text-white mr-2" />
                           </th>
-                          <th scope="col">
-                            <i className="fas fa-user" />
+                          <th scope="col" style={{ width: '25%' }}>
+                            <i className="mdi mdi-18px mdi-account-supervisor-circle text-white mr-2" />
                           </th>
-                          <th scope="col">
-                            <i className="fas fa-donate" />
+                          <th scope="col" style={{ width: '12.5%' }}>
+                            <i className="mdi mdi-18px mdi-cash-multiple text-white mr-2" />
                           </th>
-                          <th scope="col" style={{ width: '20%' }}>
-                            <i className="fas fa-file-signature" />
+                          <th scope="col" style={{ width: '10%' }}>
+                            <i className="mdi mdi-18px mdi-progress-upload text-white mr-2" />
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        {map(electedValidators, (validator: ElectionValidator) => (
-                          <Validator key={validator.address} {...validator} />
-                        ))}
+                        {map(
+                          electionValidators,
+                          (validator: ElectionValidator) => (
+                            <Validator key={validator.address} {...validator} />
+                          ),
+                        )}
                       </tbody>
-                    </table>
+                    </Table>
                   </div>
                 </CardBody>
               </Card>
