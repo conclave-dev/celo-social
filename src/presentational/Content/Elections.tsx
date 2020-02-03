@@ -1,21 +1,33 @@
 import React, { memo } from 'react';
-import { map } from 'lodash';
 import { Row, Col, Card, CardBody, Table } from 'reactstrap';
+import fmt from '../../utils/fmt';
 import Summary from './Elections/Summary';
 import Validator from './Elections/Validator';
-import { ElectionSummary, ElectionValidator } from '../../types/election';
+import {
+  ElectionSummary,
+  ElectionValidator,
+  ElectionGroup,
+} from '../../types/election';
 
 const Elections = memo(
   ({
     epoch,
     block,
-    validators,
-    electionValidators,
+    electionSummary,
+    electedValidators,
+    electedGroups,
   }: {
     epoch: number;
     block: number;
-    validators: any;
-    electionValidators: { [key: string]: ElectionValidator };
+    electionSummary: ElectionSummary;
+    electedValidators: {
+      byId: { [key: string]: ElectionValidator };
+      allIds: string[];
+    };
+    electedGroups: {
+      byId: { [key: string]: ElectionGroup };
+      allIds: [];
+    };
   }) => (
     <>
       <div className="content">
@@ -26,12 +38,12 @@ const Elections = memo(
                 <h4 className="page-title">Current Election</h4>
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">Epoch {epoch}</li>
-                  <li className="breadcrumb-item">Block {block}</li>
+                  <li className="breadcrumb-item">Block {fmt.int(block)}</li>
                 </ol>
               </Col>
             </Row>
           </div>
-          <Summary {...validators} />
+          <Summary {...electionSummary} />
           <Row>
             <Col lg="12">
               <Card>
@@ -58,12 +70,19 @@ const Elections = memo(
                         </tr>
                       </thead>
                       <tbody>
-                        {map(
-                          electionValidators,
-                          (validator: ElectionValidator) => (
-                            <Validator key={validator.address} {...validator} />
-                          ),
-                        )}
+                        {electedValidators.allIds.map(id => {
+                          const validator: ElectionValidator =
+                            electedValidators.byId[id];
+
+                          return (
+                            <Validator
+                              key={id}
+                              address={id}
+                              validator={validator}
+                              group={electedGroups.byId[validator.groupAddress]}
+                            />
+                          );
+                        })}
                       </tbody>
                     </Table>
                   </div>

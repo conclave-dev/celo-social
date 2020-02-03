@@ -1,51 +1,73 @@
 import React, { memo } from 'react';
 import { Progress } from 'reactstrap';
+import Anchor from '../../Reusable/Anchor';
+import fmt from '../../../utils/fmt';
+import { ElectionValidator, ElectionGroup } from '../../../types/election';
 
 const ElectionValidators = memo(
   ({
-    groupName,
-    votes,
-    name,
-    feesEarned,
-    blockSignaturePercentage,
+    address,
+    validator: { uptime = 0, earnings = 0, name: validatorName, groupAddress },
+    group: { votes, name: groupName },
   }: {
-    groupName: string;
-    votes: string;
-    name: string;
-    feesEarned: string;
-    blockSignaturePercentage: number;
+    address: string;
+    validator: ElectionValidator;
+    group: ElectionGroup;
   }) => {
-    const feesEarnedProps = {
-      icon: `mdi mdi-checkbox-${feesEarned ? 'marked-circle' : 'blank-circle-outline'}`,
-      iconColor: feesEarned ? 'success' : 'muted',
-    };
+    let uptimeProgressColor = 'success';
 
-    let getBlockSignatureProgressColor = 'success';
-
-    if (blockSignaturePercentage < 66.7) {
-      getBlockSignatureProgressColor = blockSignaturePercentage >= 33.4 ? 'warning' : 'danger';
+    if (uptime < 66.7) {
+      uptimeProgressColor = uptime >= 33.4 ? 'warning' : 'danger';
     }
 
     return (
       <tr>
-        <td>{votes}</td>
-        <td>{name}</td>
+        <td>{fmt.bigInt(votes)}</td>
         <td>
-          <div className="team">{groupName}</div>
+          <Anchor
+            href={`https://baklava-blockscout.celo-testnet.org/address/${address}/celo`}
+          >
+            {validatorName}
+          </Anchor>
         </td>
         <td>
-          <span className={`badge badge-soft-${feesEarnedProps.iconColor} badge-pill`}>
-            {`$${feesEarned}`}
+          <div className="team">
+            <Anchor
+              href={`https://baklava-blockscout.celo-testnet.org/address/${groupAddress}/celo`}
+            >
+              {groupName}
+            </Anchor>
+          </div>
+        </td>
+        <td>
+          <span className={`badge badge-soft-success badge-pill`}>
+            {`$${earnings}`}
           </span>
         </td>
         <td>
-          <p className="float-right mb-0 ml-3">{`${blockSignaturePercentage}%`}</p>
-          <Progress
-            className="mt-2"
-            style={{ height: '5px' }}
-            color={getBlockSignatureProgressColor}
-            value={blockSignaturePercentage}
-          />
+          <Progress multi>
+            <Progress
+              animated
+              bar
+              style={{ height: '7.5px' }}
+              color="success"
+              value="28"
+            />
+            <Progress
+              animated
+              bar
+              style={{ height: '7.5px' }}
+              color="danger"
+              value="6"
+            />
+            <Progress
+              animated
+              bar
+              style={{ height: '7.5px' }}
+              color="success"
+              value="66"
+            />
+          </Progress>
         </td>
       </tr>
     );
