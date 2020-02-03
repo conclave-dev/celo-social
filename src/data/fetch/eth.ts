@@ -1,17 +1,10 @@
-import {
-  api,
-  defaultOptions,
-} from './config';
-import { unpackJSONResponse } from './util';
+import { apiFetch, defaultOptions } from './util';
 
-const getBlockNumber = async () => await unpackJSONResponse(await fetch(`${api.eth}/getBlockNumber`, defaultOptions));
+const getBlockNumber = () => apiFetch('/eth/getBlockNumber');
 
-const getBlockByNumber = async (blockNumber) => await unpackJSONResponse(await fetch(`${api.eth}/getBlockByNumber`, {
-  ...defaultOptions,
-  body: JSON.stringify({ opts: { blockNumber } })
-}));
+const getBlockByNumber = (blockNumber: number) =>
+  apiFetch('/eth/getBlockByNumber', {
+    opts: { blockNumber },
+  });
 
-export {
-  getBlockNumber,
-  getBlockByNumber,
-};
+export { getBlockNumber, getBlockByNumber };

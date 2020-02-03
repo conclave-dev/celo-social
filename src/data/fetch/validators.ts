@@ -1,20 +1,15 @@
-import { api, defaultOptions } from './config';
-import { unpackJSONResponse } from './util';
+import { apiFetch, defaultOptions } from './util';
 
-const getValidator = async address =>
-  await unpackJSONResponse(
-    await fetch(`${api.validators}/getValidator`, {
-      ...defaultOptions,
-      body: JSON.stringify({ address: address }),
-    }),
-  );
+const getValidator = (blockNumber: number, address: string) =>
+  apiFetch('/validators/getValidator', {
+    opts: { blockNumber },
+    address,
+  });
 
-const getValidatorGroup = async groupAddress =>
-  await unpackJSONResponse(
-    await fetch(`${api.validators}/getValidatorGroup`, {
-      ...defaultOptions,
-      body: JSON.stringify({ groupAddress }),
-    }),
-  );
+const getValidatorGroup = (blockNumber: number, groupAddress: string) =>
+  apiFetch('/validators/getValidatorGroup', {
+    opts: { blockNumber },
+    groupAddress,
+  });
 
 export { getValidator, getValidatorGroup };

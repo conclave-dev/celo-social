@@ -1,20 +1,15 @@
-import { api, defaultOptions } from './config';
-import { unpackJSONResponse } from './util';
+import { apiFetch } from './util';
 
-const validatorSignerToAccount = async (address: string) =>
-  await unpackJSONResponse(
-    await fetch(`${api.accounts}/validatorSignerToAccount`, {
-      ...defaultOptions,
-      body: JSON.stringify({ address }),
-    }),
-  );
+const validatorSignerToAccount = (blockNumber: number, address: string) =>
+  apiFetch('/accounts/validatorSignerToAccount', {
+    opts: { blockNumber },
+    address,
+  });
 
-const getAccountSummary = async (address: string) =>
-  await unpackJSONResponse(
-    await fetch(`${api.accounts}/getAccountSummary`, {
-      ...defaultOptions,
-      body: JSON.stringify({ address }),
-    }),
-  );
+const getAccountSummary = (blockNumber: number, address: string) =>
+  apiFetch('/accounts/getAccountSummary', {
+    opts: { blockNumber },
+    address,
+  });
 
 export { validatorSignerToAccount, getAccountSummary };
