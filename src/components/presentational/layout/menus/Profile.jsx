@@ -3,7 +3,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import { withRouter } from 'react-router-dom';
 
 // users
-import user4 from '../../../static-assets/images/users/user-4.jpg';
+import user4 from '../../../../static-assets/images/users/user-4.jpg';
 
 class ProfileMenu extends Component {
   constructor(props) {

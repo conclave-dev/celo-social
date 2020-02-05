@@ -32,9 +32,6 @@ const reduceError = (state, {
 const evalActionPayload = (state, action, caseReducer) => {
   const { status } = action;
 
-  console.log('state', state);
-  console.log('action', action);
-
   switch (status) {
     case 100:
       return reduceInit(state);
