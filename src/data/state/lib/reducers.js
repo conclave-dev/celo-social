@@ -7,24 +7,21 @@ const initialStateDecorator = state => ({
 });
 
 // Flexible handlers for different status cases
-const reduceStartState = (state) => ({
+const reduceInit = (state) => ({
   ...state,
   inProgress: true,
   errorCode: null,
   errorMessage: null,
 });
 
-const reduceSuccessState = (state, successState) => ({
-  ...state,
-  ...successState,
+const reduceData = (newState) => ({
+  ...newState,
   inProgress: false,
 });
 
-const reduceErrorState = (state, {
+const reduceError = (state, {
   status,
-  data: {
-    error: { message }
-  },
+  message,
 }) => ({
   ...state,
   errorCode: status,
@@ -33,20 +30,19 @@ const reduceErrorState = (state, {
 });
 
 const evalActionPayload = (state, action, caseReducer) => {
-  const {
-    response,
-    error,
-  } = action;
+  const { status } = action;
 
-  if (response) {
-    // Reduce state with the return value of `caseReducer`
-    return reduceSuccessState(state, caseReducer(state, action));
-  } else if (error) {
-    // Reduce state with the error response
-    return reduceErrorState(state, error);
+  console.log('state', state);
+  console.log('action', action);
+
+  switch (status) {
+    case 100:
+      return reduceInit(state);
+    case 200:
+      return reduceData(caseReducer(state, action));
+    default:
+      return reduceError(state, action);
   }
-
-  return reduceStartState(state);
 };
 
 export {
