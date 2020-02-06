@@ -8,18 +8,35 @@ const initialState = initialStateDecorator({
   election: {
     epoch: 0,
     block: 0,
+    votes: 0,
+    candidates: {},
+    candidateGroups: {},
   },
-  candidatesByElection: {},
-  allElections: [],
+  cachedElections: [],
 });
 
-const fetchElection = (state, action) => ({
+const fetchElection = (state, { epoch, block }) => ({
   ...state,
   election: {
-    epoch: action.epoch,
-    block: action.block,
+    ...state.election,
+    epoch,
+    block,
   },
 });
+
+const fetchElectionCandidates = (state, { candidates, candidateGroups }) => {
+
+  console.log('candidates', candidates);
+
+  return ({
+    ...state,
+    election: {
+      ...state.election,
+      candidates,
+      candidateGroups,
+    },
+  })
+};
 
 export default (state = initialState, action) => {
   const { type } = action;
@@ -28,7 +45,7 @@ export default (state = initialState, action) => {
     case FETCH_ELECTION:
       return evalActionPayload(state, action, fetchElection);
     case FETCH_ELECTION_CANDIDATES:
-      return evalActionPayload(state, action, (state, action) => state);
+      return evalActionPayload(state, action, fetchElectionCandidates);
     default:
       return state;
   }

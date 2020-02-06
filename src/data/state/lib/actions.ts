@@ -1,18 +1,18 @@
 // Cleanly wraps actions
 const actionWrapper = ({ type }) => {
   return {
-    sendInit: () => ({
+    init: () => ({
       type,
       status: 100,
       message: 'Init',
     }),
-    sendData: data => ({
+    packData: data => ({
       type,
       status: 200,
       message: 'Success',
       ...data,
     }),
-    sendError: error => ({
+    packError: error => ({
       type,
       status: error.status || 400,
       message: error.message || 'Unspecified error',
