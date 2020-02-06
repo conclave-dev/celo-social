@@ -35,15 +35,15 @@ const getUpdatedUptime = async (blockNumber, candidateUptime, candidates) => {
     totalSignatures += clonedCandidateUptime[address].totalSignatures;
   });
 
-  // const averageUptime = calculateAverageUptime(
-  //   blockNumber,
-  //   totalSignatures,
-  //   Object.keys(candidates).length,
-  // );
+  const averageUptime = calculateAverageUptime(
+    blockNumber,
+    totalSignatures,
+    Object.keys(candidates).length,
+  );
 
   return {
     candidateUptime: clonedCandidateUptime,
-    averageUptime: 1,
+    averageUptime,
   };
 };
 

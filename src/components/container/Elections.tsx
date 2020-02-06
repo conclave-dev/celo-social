@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { reduce, isEmpty } from 'lodash';
-import { Promise } from 'bluebird';
 import Layout from '../presentational/elections/Layout';
 import Summary from '../presentational/elections/Summary';
 import Candidates from '../presentational/elections/Candidates';
@@ -9,6 +8,7 @@ import {
   fetchElection,
   fetchElectionCandidates,
   fetchElectionCandidateUptime,
+  syncElectionCandidateUptime,
 } from '../../data/state/actions/elections';
 
 class ElectionsContainer extends PureComponent<{
@@ -22,7 +22,9 @@ class ElectionsContainer extends PureComponent<{
   fetchElection;
   fetchElectionCandidates;
   fetchElectionCandidateUptime;
+  syncElectionCandidateUptime;
   inProgress;
+  isSyncing;
 }> {
   constructor(props) {
     super(props);
@@ -30,59 +32,39 @@ class ElectionsContainer extends PureComponent<{
     props.fetchElection();
   }
 
-  checkSyncStatus = (epoch, block, candidateUptime) => {
-    const epochStart = epoch * 720 - 719;
-    const currentlySyncedBlock =
-      Object.keys(candidateUptime).length + epochStart;
+  checkSyncStatus = () => {
+    const { block, candidates, candidateUptime } = this.props;
+    const lastUpdatedAt = candidateUptime[Object.keys(candidates)[0]].updatedAt;
 
-    if (currentlySyncedBlock < block) {
-      this.syncElectionCandidateUptime();
+    if (isEmpty(candidateUptime) || lastUpdatedAt < block) {
+      this.props.syncElectionCandidateUptime();
     }
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    const {
+      epoch: prevEpoch,
+      inProgress: prevInProgress,
+    } = prevProps;
     const {
       epoch,
       block,
       candidates,
-      candidateUptime,
       inProgress,
+      isSyncing,
     } = this.props;
 
-    if (epoch) {
-      const candidatesExist = !!Object.keys(candidates).length;
-
-      if (!inProgress) {
-        if (candidatesExist && isEmpty(candidateUptime)) {
-          this.checkSyncStatus(epoch, block, candidateUptime);
-        } else if (!inProgress && isEmpty(candidateUptime)) {
-          this.props.fetchElectionCandidates(block);
-        }
-      }
+    if (!prevEpoch && epoch && isEmpty(candidates)) {
+      this.props.fetchElectionCandidates(block);
+    } else if (
+      prevInProgress &&
+      !inProgress &&
+      !isEmpty(candidates) &&
+      !isSyncing
+    ) {
+      this.checkSyncStatus();
     }
   }
-
-  syncElectionCandidateUptime = async () => {
-    const { candidateUptime, epoch, block } = this.props;
-    const lastSynced = candidateUptime[0]
-      ? candidateUptime[0].updatedAt
-      : epoch * 720 - 719;
-    const numUnsyncedBlocks = block - lastSynced - 1;
-
-    if (numUnsyncedBlocks) {
-      const unsyncedBlockIterator = new Array(numUnsyncedBlocks);
-      const startingBlock = lastSynced;
-
-      // await Promise.each(
-      //   unsyncedBlockIterator,
-      //   async (_, idx) =>
-      //     this.props.fetchElectionCandidateUptime(startingBlock + idx),
-      // for (let i = 0; i < 5; i += 1) {
-      await this.props.fetchElectionCandidateUptime(startingBlock);
-      // }
-      // );
-    }
-  };
 
   render = () => {
     const {
@@ -101,7 +83,7 @@ class ElectionsContainer extends PureComponent<{
 
     return (
       <Layout epoch={epoch} block={block}>
-        {/* <Summary
+        <Summary
           votes={totalVotes}
           earnings={earnings}
           uptime={averageUptime.toFixed(2)}
@@ -110,7 +92,7 @@ class ElectionsContainer extends PureComponent<{
           block={block}
           candidates={candidates}
           candidateGroups={candidateGroups}
-        /> */}
+        />
       </Layout>
     );
   };
@@ -124,4 +106,5 @@ export default connect(mapStateToProps, {
   fetchElection,
   fetchElectionCandidates,
   fetchElectionCandidateUptime,
+  syncElectionCandidateUptime,
 })(ElectionsContainer);

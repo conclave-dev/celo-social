@@ -4,6 +4,7 @@ import {
   FETCH_ELECTION,
   FETCH_ELECTION_CANDIDATES,
   FETCH_ELECTION_CANDIDATE_UPTIME,
+  SYNC_ELECTION_CANDIDATE_UPTIME,
 } from '../actions/util/types';
 import { evalActionPayload, initialStateDecorator } from '../lib/reducers';
 import { validateStateFields } from '../lib/cache';
@@ -16,6 +17,7 @@ const initialState = initialStateDecorator({
   candidates: {},
   candidateGroups: {},
   candidateUptime: {},
+  isSyncing: false,
 });
 
 const setElectionsCache = state => state;
@@ -28,6 +30,7 @@ const getElectionsCache = (state, { state: cachedState }) => {
   const { isValid, sanitizedState } = validateStateFields(
     Object.keys(initialState),
     cachedState,
+    ['isSyncing'],
   );
 
   if (!isValid) {
@@ -35,7 +38,10 @@ const getElectionsCache = (state, { state: cachedState }) => {
     return state;
   }
 
-  return sanitizedState;
+  return {
+    ...state,
+    ...sanitizedState,
+  };
 };
 
 const fetchElection = (state, { epoch, block }) => {
@@ -81,6 +87,8 @@ const fetchElectionCandidateUptime = (
   averageUptime,
 });
 
+const syncElectionCandidateUptime = (state, action) => ({ ...state, isSyncing: action.isSyncing })
+
 export default (state = initialState, action) => {
   const { type } = action;
 
@@ -95,6 +103,8 @@ export default (state = initialState, action) => {
       return evalActionPayload(state, action, fetchElectionCandidates);
     case FETCH_ELECTION_CANDIDATE_UPTIME:
       return evalActionPayload(state, action, fetchElectionCandidateUptime);
+    case SYNC_ELECTION_CANDIDATE_UPTIME:
+      return evalActionPayload(state, action, syncElectionCandidateUptime);
     default:
       return state;
   }

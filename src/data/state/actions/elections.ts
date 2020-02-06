@@ -4,6 +4,7 @@ import {
   FETCH_ELECTION_CANDIDATE_UPTIME,
   SET_ELECTIONS_CACHE,
   GET_ELECTIONS_CACHE,
+  SYNC_ELECTION_CANDIDATE_UPTIME,
 } from './util/types';
 import { actionWrapper } from '../lib/actions';
 import { validateStateFields } from '../lib/cache';
@@ -24,13 +25,14 @@ const setElectionsCache = () => {
 
     try {
       const { elections } = getState();
-      const { isValid, sanitizedState} = validateStateFields(Object.keys(elections), elections)
+      const { isValid, sanitizedState } = validateStateFields(
+        Object.keys(elections),
+        elections,
+        ['isSyncing'],
+      );
 
       if (isValid) {
-        localStorage.setItem(
-          'elections',
-          JSON.stringify(sanitizedState),
-        );
+        localStorage.setItem('elections', JSON.stringify(sanitizedState));
       }
 
       return dispatch(packData({}));
@@ -163,10 +165,54 @@ const fetchElectionCandidateUptime = blockNumber => {
   };
 };
 
+const syncElectionCandidateUptime = () => {
+  const { packData, packError } = actionWrapper({
+    type: SYNC_ELECTION_CANDIDATE_UPTIME,
+  });
+
+  return async (dispatch, getState) => {
+    const {
+      candidateUptime,
+      candidates,
+      epoch,
+      block,
+      isSyncing,
+    } = getState().elections;
+
+    if (!isSyncing) {
+      dispatch(packData({ isSyncing: true }));
+    }
+
+    try {
+      const firstCandidate = candidateUptime[Object.keys(candidates)[0]];
+      const lastSynced = firstCandidate
+        ? firstCandidate.updatedAt
+        : epoch * 720 - 719;
+      const numUnsyncedBlocks = block - lastSynced - 1;
+
+      if (numUnsyncedBlocks) {
+        await fetchElectionCandidateUptime(lastSynced + 1)(dispatch, getState);
+        return syncElectionCandidateUptime()(dispatch, getState);
+      }
+
+      return dispatch(packData({ isSyncing: false }));
+    } catch (err) {
+      console.error(err);
+      const error = packError({
+        status: err.status,
+        message: err.message,
+      });
+
+      return dispatch(error);
+    }
+  };
+};
+
 export {
   setElectionsCache,
   getElectionsCache,
   fetchElection,
   fetchElectionCandidates,
   fetchElectionCandidateUptime,
+  syncElectionCandidateUptime,
 };
