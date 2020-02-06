@@ -1,0 +1,64 @@
+import React, { memo } from 'react';
+import { Progress, Table, Spinner } from 'reactstrap';
+import { map } from 'lodash';
+import Candidate from './Candidate';
+import Anchor from '../reusable/Anchor';
+import fmt from '../../../utils/fmt';
+
+const Candidates = ({
+  candidates,
+  candidateGroups,
+}: {
+  block: number;
+  candidates: { [key:string]: any };
+  candidateGroups: { [key:string]: any };
+}) => {
+  return (
+    <>
+      <Table responsive={true} className="project-list">
+        <thead>
+          <tr>
+            <th scope="col" style={{ width: '12.5%' }}>
+              <i className="mdi mdi-18px mdi-vote text-white mr-2" />
+            </th>
+            <th scope="col" style={{ width: '25%' }}>
+              <i className="mdi mdi-18px mdi-account text-white mr-2" />
+            </th>
+            <th scope="col" style={{ width: '25%' }}>
+              <i className="mdi mdi-18px mdi-account-supervisor-circle text-white mr-2" />
+            </th>
+            <th scope="col" style={{ width: '12.5%' }}>
+              <i className="mdi mdi-18px mdi-cash-multiple text-white mr-2" />
+            </th>
+            <th scope="col" style={{ width: '10%' }}>
+              <i className="mdi mdi-18px mdi-progress-upload text-white mr-2" />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {map(candidates, ({ address, name, groupAddress }) => {
+            const group = candidateGroups[groupAddress];
+
+            return (
+              <Candidate
+                key={address}
+                address={address}
+                name={name}
+                groupVotes={group.votes}
+                groupAddress={groupAddress}
+                groupName={group.name}
+              />
+            );
+          })}
+        </tbody>
+      </Table>
+      {!candidates.length && (
+        <div className="d-flex justify-content-center">
+          <Spinner type="grow" />
+        </div>
+      )}
+    </>
+  );
+};
+
+export default memo(Candidates);
