@@ -1,4 +1,6 @@
 import {
+  SET_ELECTIONS_CACHE,
+  GET_ELECTIONS_CACHE,
   FETCH_ELECTION,
   FETCH_ELECTION_CANDIDATES,
   FETCH_ELECTION_CANDIDATE_UPTIME,
@@ -6,50 +8,53 @@ import {
 import { evalActionPayload, initialStateDecorator } from '../lib/reducers';
 
 const initialState = initialStateDecorator({
-  election: {
-    epoch: 0,
-    block: 0,
-    votes: 0,
-    averageUptime: 0,
-    earnings: 0,
-    candidates: {},
-    candidateGroups: {},
-    candidateUptime: {},
-  },
-  cachedElections: [],
+  epoch: 0,
+  block: 0,
+  votes: 0,
+  averageUptime: 0,
+  earnings: 0,
+  candidates: {},
+  candidateGroups: {},
+  candidateUptime: {},
+  pastElections: [],
+});
+
+const setElectionsCache = (state) => (state);
+
+const getElectionsCache = (state, { state: cachedState }) => ({
+  ...state,
+  ...cachedState,
 });
 
 const fetchElection = (state, { epoch, block }) => ({
   ...state,
-  election: {
-    ...state.election,
-    epoch,
-    block,
-  },
+  epoch,
+  block,
 });
 
 const fetchElectionCandidates = (state, { candidates, candidateGroups }) => ({
   ...state,
-  election: {
-    ...state.election,
-    candidates,
-    candidateGroups,
-  },
+  candidates,
+  candidateGroups,
 });
 
-const fetchElectionCandidateUptime = (state, { candidateUptime, averageUptime }) => ({
+const fetchElectionCandidateUptime = (
+  state,
+  { candidateUptime, averageUptime },
+) => ({
   ...state,
-  election: {
-    ...state.election,
-    candidateUptime,
-    averageUptime,
-  },
+  candidateUptime,
+  averageUptime,
 });
 
 export default (state = initialState, action) => {
   const { type } = action;
 
   switch (type) {
+    case SET_ELECTIONS_CACHE:
+      return evalActionPayload(state, action, setElectionsCache);
+    case GET_ELECTIONS_CACHE:
+      return evalActionPayload(state, action, getElectionsCache);
     case FETCH_ELECTION:
       return evalActionPayload(state, action, fetchElection);
     case FETCH_ELECTION_CANDIDATES:

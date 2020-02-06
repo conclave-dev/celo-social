@@ -42,9 +42,9 @@ const Candidate = ({ address, name, groupVotes, groupAddress, groupName, block, 
   )
 };
 
-const mapStateToProps = ({ elections: { election } }) => ({
-  block: election.block,
-  candidateUptime: election.candidateUptime,
+const mapStateToProps = ({ elections }) => ({
+  block: elections.block,
+  candidateUptime: elections.candidateUptime,
 });
 
 export default connect(mapStateToProps)(memo(Candidate));

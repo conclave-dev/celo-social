@@ -12,23 +12,29 @@ import {
 } from '../../data/state/actions/elections';
 
 class ElectionsContainer extends PureComponent<{
-  election;
+  epoch;
+  block;
+  earnings;
+  candidates;
+  candidateGroups;
+  averageUptime;
+  candidateUptime;
+  fetchElection;
   fetchElectionCandidates;
   fetchElectionCandidateUptime;
 }> {
-  constructor(props) {
-    super(props);
-    props.fetchElection();
+  componentDidMount() {
+    this.props.fetchElection();
   }
 
   componentDidUpdate(prevProps) {
-    const { election: prevElec } = prevProps;
-    const { epoch, block, candidates } = this.props.election;
+    const { epoch: prevEpoch, candidates: prevCandidates } = prevProps;
+    const { epoch, block, candidates } = this.props;
 
-    if (!prevElec.epoch && epoch) {
+    if (!prevEpoch && epoch) {
       this.props.fetchElectionCandidates(block);
     } else if (
-      !Object.keys(prevElec.candidates).length &&
+      !Object.keys(prevCandidates).length &&
       Object.keys(candidates).length
     ) {
       this.syncElectionCandidateUptime();
@@ -36,7 +42,7 @@ class ElectionsContainer extends PureComponent<{
   }
 
   syncElectionCandidateUptime = async () => {
-    const { candidateUptime, epoch, block } = this.props.election;
+    const { candidateUptime, epoch, block } = this.props;
     const lastSynced = candidateUptime[0]
       ? candidateUptime[0].updatedAt
       : epoch * 720 - 719;
@@ -46,35 +52,43 @@ class ElectionsContainer extends PureComponent<{
       const unsyncedBlockIterator = new Array(numUnsyncedBlocks);
       const startingBlock = lastSynced;
 
-      await Promise.each(unsyncedBlockIterator, async (_, idx) => (
-        this.props.fetchElectionCandidateUptime(startingBlock + idx)
+      await Promise.each(
+        unsyncedBlockIterator,
+        async (_, idx) =>
+          this.props.fetchElectionCandidateUptime(startingBlock + idx),
         // for (let i = 0; i < 5; i+=1) {
         //   await this.props.fetchElectionCandidateUptime(startingBlock + i)
         // }
-      ));
+      );
     }
   };
 
   render = () => {
-    const { election } = this.props;
+    const {
+      epoch,
+      block,
+      earnings,
+      candidates,
+      candidateGroups,
+      averageUptime,
+    } = this.props;
     const totalVotes = reduce(
-      election.candidateGroups,
+      candidateGroups,
       (total, { votes }) => total + votes,
       0,
     );
-    const averageUptime = election.averageUptime.toFixed(2);
 
     return (
-      <Layout epoch={election.epoch} block={election.block}>
+      <Layout epoch={epoch} block={block}>
         <Summary
           votes={totalVotes}
-          earnings={election.earnings}
-          uptime={averageUptime}
+          earnings={earnings}
+          uptime={averageUptime.toFixed(2)}
         />
         <Candidates
-          block={election.block}
-          candidates={election.candidates}
-          candidateGroups={election.candidateGroups}
+          block={block}
+          candidates={candidates}
+          candidateGroups={candidateGroups}
         />
       </Layout>
     );

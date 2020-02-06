@@ -2,6 +2,8 @@ import {
   FETCH_ELECTION,
   FETCH_ELECTION_CANDIDATES,
   FETCH_ELECTION_CANDIDATE_UPTIME,
+  SET_ELECTIONS_CACHE,
+  GET_ELECTIONS_CACHE,
 } from './util/types';
 import { actionWrapper } from '../lib/actions';
 import { getBlockNumber } from '../../fetch/eth';
@@ -10,6 +12,54 @@ import {
   getValidatorGroupsOverviewByAccounts,
 } from '../../fetch/validators';
 import { getGroupAddresses, getUpdatedUptime } from '../lib/elections';
+
+const setElectionsCache = () => {
+  const { init, packData, packError } = actionWrapper({
+    type: SET_ELECTIONS_CACHE,
+  });
+
+  return (dispatch, getState) => {
+    dispatch(init());
+
+    try {
+      const { elections } = getState();
+
+      localStorage.setItem('elections', JSON.stringify(elections));
+
+      return dispatch(packData({}));
+    } catch (err) {
+      const error = packError({
+        status: err.status,
+        message: err.message,
+      });
+
+      return dispatch(error);
+    }
+  };
+};
+
+const getElectionsCache = () => {
+  const { init, packData, packError } = actionWrapper({
+    type: GET_ELECTIONS_CACHE,
+  });
+
+  return (dispatch) => {
+    dispatch(init());
+
+    try {
+      const data = packData({ state: JSON.parse(localStorage.getItem('elections')) });
+
+      return dispatch(data);
+    } catch (err) {
+      const error = packError({
+        status: err.status,
+        message: err.message,
+      });
+
+      return dispatch(error);
+    }
+  };
+};
 
 const fetchElection = () => {
   const { init, packData, packError } = actionWrapper({
@@ -71,7 +121,7 @@ const fetchElectionCandidates = blockNumber => {
   };
 };
 
-const fetchElectionCandidateUptime = (blockNumber) => {
+const fetchElectionCandidateUptime = blockNumber => {
   const { init, packData, packError } = actionWrapper({
     type: FETCH_ELECTION_CANDIDATE_UPTIME,
   });
@@ -81,12 +131,12 @@ const fetchElectionCandidateUptime = (blockNumber) => {
 
     try {
       const {
-        elections: { election },
+        elections,
       } = await getState();
       const { candidateUptime, averageUptime } = await getUpdatedUptime(
         blockNumber,
-        election.candidateUptime,
-        election.candidates,
+        elections.candidateUptime,
+        elections.candidates,
       );
       const data = packData({
         candidateUptime,
@@ -106,4 +156,10 @@ const fetchElectionCandidateUptime = (blockNumber) => {
   };
 };
 
-export { fetchElection, fetchElectionCandidates, fetchElectionCandidateUptime };
+export {
+  setElectionsCache,
+  getElectionsCache,
+  fetchElection,
+  fetchElectionCandidates,
+  fetchElectionCandidateUptime,
+};
