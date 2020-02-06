@@ -48,6 +48,7 @@ const getElectionsCache = () => {
 
     try {
       const data = packData({ state: JSON.parse(localStorage.getItem('elections')) });
+      console.log('DATA', data)
 
       return dispatch(data);
     } catch (err) {
@@ -133,11 +134,12 @@ const fetchElectionCandidateUptime = blockNumber => {
       const {
         elections,
       } = await getState();
+      console.log('elections', elections);
       const { candidateUptime, averageUptime } = await getUpdatedUptime(
         blockNumber,
         elections.candidateUptime,
         elections.candidates,
-      );
+        );
       const data = packData({
         candidateUptime,
         averageUptime,

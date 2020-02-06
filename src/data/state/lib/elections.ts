@@ -17,8 +17,9 @@ const getUpdatedUptime = async (blockNumber, candidateUptime, candidates) => {
   const clonedCandidateUptime = cloneDeep(candidateUptime);
   let totalSignatures = 0;
 
-  forEach(candidates, ({ signerIndex, address }) => {
+  console.log('clonedCandidateUptime', clonedCandidateUptime);
 
+  forEach(candidates, ({ signerIndex, address }) => {
     const incrementUptimeBy = bitIsSet(
       parseBlockExtraData(header.extraData).parentAggregatedSeal.bitmap,
       signerIndex,
@@ -53,6 +54,9 @@ const calculateAverageUptime = (
   totalSignatures,
   numCandidates,
 ) => {
+  console.log('currentBlock', currentBlock);
+  console.log('totalSignatures', totalSignatures);
+  console.log('numCandidates', numCandidates);
   const completedEpochBlocks = currentBlock % 720;
   return ((totalSignatures / numCandidates) / completedEpochBlocks) * 100;
 };

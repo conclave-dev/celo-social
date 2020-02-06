@@ -36,7 +36,7 @@ const Candidates = ({
           </tr>
         </thead>
         <tbody>
-          {map(candidates, ({ address, name, groupAddress }) => {
+          {!Object.keys(candidates).length ? map(candidates, ({ address, name, groupAddress }) => {
             const group = candidateGroups[groupAddress];
 
             return (
@@ -49,10 +49,10 @@ const Candidates = ({
                 groupName={group.name}
               />
             );
-          })}
+          }) : <></>}
         </tbody>
       </Table>
-      {!candidates.length && (
+      {!Object.keys(candidates).length && (
         <div className="d-flex justify-content-center">
           <Spinner type="grow" />
         </div>
