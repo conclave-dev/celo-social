@@ -22,6 +22,7 @@ class ElectionsContainer extends PureComponent<{
   fetchElection;
   fetchElectionCandidates;
   fetchElectionCandidateUptime;
+  inProgress,
 }> {
   constructor(props) {
     super(props);
@@ -29,17 +30,22 @@ class ElectionsContainer extends PureComponent<{
     props.fetchElection();
   }
 
-  componentDidUpdate(prevProps) {
-    const { epoch: prevEpoch, candidates: prevCandidates } = prevProps;
-    const { epoch, block, candidates } = this.props;
+  checkSyncStatus = (epoch, block, candidateUptime) => {
+    const epochStart = (epoch * 720) - 719;
+    const currentlySyncedBlock = Object.keys(candidateUptime).length + epochStart;
 
-    if (!prevEpoch && epoch) {
-      this.props.fetchElectionCandidates(block);
-    } else if (
-      !Object.keys(prevCandidates).length &&
-      Object.keys(candidates).length
-    ) {
+    if (currentlySyncedBlock < block) {
       this.syncElectionCandidateUptime();
+    }
+  }
+
+  componentDidMount() {
+    const { epoch, block, candidates, candidateUptime, inProgress } = this.props;
+
+    this.checkSyncStatus(epoch, block, candidateUptime);
+
+    if (!Object.keys(candidates).length && !inProgress) {
+      this.props.fetchElectionCandidates(block);
     }
   }
 
@@ -58,9 +64,6 @@ class ElectionsContainer extends PureComponent<{
         unsyncedBlockIterator,
         async (_, idx) =>
           this.props.fetchElectionCandidateUptime(startingBlock + idx),
-        // for (let i = 0; i < 5; i+=1) {
-        //   await this.props.fetchElectionCandidateUptime(startingBlock + i)
-        // }
       );
     }
   };
