@@ -1,4 +1,4 @@
-import React, { useReducer, memo } from 'react';
+import React, { memo } from 'react';
 import User from '../presentational/content/User';
 
 const UserContainer = () => {

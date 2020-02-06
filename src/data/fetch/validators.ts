@@ -12,13 +12,10 @@ const getValidatorGroup = (blockNumber: number, groupAddress: string) =>
     groupAddress,
   });
 
-const getElectedValidatorsOverview = (blockNumber: number) => {
-  console.log('blockNumber', blockNumber);
-
-  return apiFetch('/validators/getElectedValidatorsOverview', {
+const getElectedValidatorsOverview = (blockNumber: number) =>
+  apiFetch('/validators/getElectedValidatorsOverview', {
     opts: { blockNumber },
   });
-}
 
 const getValidatorGroupsOverviewByAccounts = (
   blockNumber: number,

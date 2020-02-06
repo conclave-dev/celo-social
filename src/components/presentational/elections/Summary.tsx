@@ -3,7 +3,7 @@ import { Row, Col, Card, CardBody } from 'reactstrap';
 import fmt from '../../../utils/fmt';
 import { Summary as SummaryType } from '../../../types/election';
 
-const Summary = memo(({ votes = 0, earnings = 0, uptime = 0 }: SummaryType) => (
+const Summary = memo(({ votes, earnings, uptime }: SummaryType) => (
   <Row>
     <Col xl="4" md="4">
       <Card className="bg-pattern">
