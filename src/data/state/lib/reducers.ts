@@ -2,16 +2,16 @@
 const initialStateDecorator = state => ({
   ...state,
   inProgress: false,
-  errorCode: null,
-  errorMessage: null,
+  errorCode: 0,
+  errorMessage: '',
 });
 
 // Flexible handlers for different status cases
 const reduceInit = (state) => ({
   ...state,
   inProgress: true,
-  errorCode: null,
-  errorMessage: null,
+  errorCode: 0,
+  errorMessage: '',
 });
 
 const reduceData = (newState) => ({

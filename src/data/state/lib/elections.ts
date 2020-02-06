@@ -17,8 +17,6 @@ const getUpdatedUptime = async (blockNumber, candidateUptime, candidates) => {
   const clonedCandidateUptime = cloneDeep(candidateUptime);
   let totalSignatures = 0;
 
-  console.log('clonedCandidateUptime', clonedCandidateUptime);
-
   forEach(candidates, ({ signerIndex, address }) => {
     const incrementUptimeBy = bitIsSet(
       parseBlockExtraData(header.extraData).parentAggregatedSeal.bitmap,
@@ -37,15 +35,15 @@ const getUpdatedUptime = async (blockNumber, candidateUptime, candidates) => {
     totalSignatures += clonedCandidateUptime[address].totalSignatures;
   });
 
-  const averageUptime = calculateAverageUptime(
-    blockNumber,
-    totalSignatures,
-    Object.keys(candidates).length,
-  );
+  // const averageUptime = calculateAverageUptime(
+  //   blockNumber,
+  //   totalSignatures,
+  //   Object.keys(candidates).length,
+  // );
 
   return {
     candidateUptime: clonedCandidateUptime,
-    averageUptime,
+    averageUptime: 1,
   };
 };
 
@@ -54,9 +52,6 @@ const calculateAverageUptime = (
   totalSignatures,
   numCandidates,
 ) => {
-  console.log('currentBlock', currentBlock);
-  console.log('totalSignatures', totalSignatures);
-  console.log('numCandidates', numCandidates);
   const completedEpochBlocks = currentBlock % 720;
   return ((totalSignatures / numCandidates) / completedEpochBlocks) * 100;
 };

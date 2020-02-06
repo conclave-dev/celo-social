@@ -6,42 +6,62 @@ import {
   FETCH_ELECTION_CANDIDATE_UPTIME,
 } from '../actions/util/types';
 import { evalActionPayload, initialStateDecorator } from '../lib/reducers';
+import { validateStateFields } from '../lib/cache';
 
 const initialState = initialStateDecorator({
   epoch: 0,
   block: 0,
-  votes: 0,
   averageUptime: 0,
-  earnings: 0,
+  earnings: 1,
   candidates: {},
   candidateGroups: {},
   candidateUptime: {},
-  previousElections: {},
 });
 
 const setElectionsCache = state => state;
 
-const getElectionsCache = (state, { state: cachedState }) => ({
-  ...state,
-  ...cachedState,
-});
+const getElectionsCache = (state, { state: cachedState }) => {
+  if (!cachedState) {
+    return state;
+  }
+
+  const { isValid, sanitizedState } = validateStateFields(
+    Object.keys(initialState),
+    cachedState,
+  );
+
+  if (!isValid) {
+    localStorage.removeItem('elections');
+    return state;
+  }
+
+  return sanitizedState;
+};
 
 const fetchElection = (state, { epoch, block }) => {
-  const { previousElections, ...election } = state;
+  const { previousElections = {}, ...election } = state;
+
+  if (!election.epoch) {
+    return {
+      ...state,
+      epoch,
+      block,
+    };
+  }
 
   // If the recently-restored cached election is older than one epoch...
   // move it to previousElections, and sync from the current epoch
+  if (election.epoch < epoch) {
+    return {
+      ...state,
+      epoch,
+      block,
+      previousElections: { ...previousElections, [election.epoch]: election },
+    };
+  }
+
   return {
-    ...(election.epoch < epoch
-      ? {
-          ...initialState,
-          epoch,
-          previousElections: {
-            ...election.previousElections,
-            [election.epoch]: election,
-          },
-        }
-      : { ...state }),
+    ...state,
     block,
   };
 };

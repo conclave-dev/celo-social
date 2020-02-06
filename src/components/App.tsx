@@ -15,7 +15,7 @@ class App extends PureComponent<{setElectionsCache}> {
   }
 
   cacheStore = () => {
-    // this.props.setElectionsCache();
+    this.props.setElectionsCache();
   }
 
   componentDidMount() {

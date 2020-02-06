@@ -6,6 +6,7 @@ import {
   GET_ELECTIONS_CACHE,
 } from './util/types';
 import { actionWrapper } from '../lib/actions';
+import { validateStateFields } from '../lib/cache';
 import { getBlockNumber } from '../../fetch/eth';
 import {
   getElectedValidatorsOverview,
@@ -23,8 +24,14 @@ const setElectionsCache = () => {
 
     try {
       const { elections } = getState();
+      const { isValid, sanitizedState} = validateStateFields(Object.keys(elections), elections)
 
-      localStorage.setItem('elections', JSON.stringify(elections));
+      if (isValid) {
+        localStorage.setItem(
+          'elections',
+          JSON.stringify(sanitizedState),
+        );
+      }
 
       return dispatch(packData({}));
     } catch (err) {
@@ -43,12 +50,13 @@ const getElectionsCache = () => {
     type: GET_ELECTIONS_CACHE,
   });
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(init());
 
     try {
-      const data = packData({ state: JSON.parse(localStorage.getItem('elections')) });
-      console.log('DATA', data)
+      const data = packData({
+        state: JSON.parse(localStorage.getItem('elections')),
+      });
 
       return dispatch(data);
     } catch (err) {
@@ -131,15 +139,12 @@ const fetchElectionCandidateUptime = blockNumber => {
     dispatch(init);
 
     try {
-      const {
-        elections,
-      } = await getState();
-      console.log('elections', elections);
+      const { elections } = await getState();
       const { candidateUptime, averageUptime } = await getUpdatedUptime(
         blockNumber,
         elections.candidateUptime,
         elections.candidates,
-        );
+      );
       const data = packData({
         candidateUptime,
         averageUptime,

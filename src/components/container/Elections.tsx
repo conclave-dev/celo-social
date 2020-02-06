@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { reduce } from 'lodash';
+import { reduce, isEmpty } from 'lodash';
 import { Promise } from 'bluebird';
 import Layout from '../presentational/elections/Layout';
 import Summary from '../presentational/elections/Summary';
@@ -40,7 +40,7 @@ class ElectionsContainer extends PureComponent<{
     }
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
     const {
       epoch,
       block,
@@ -50,10 +50,14 @@ class ElectionsContainer extends PureComponent<{
     } = this.props;
 
     if (epoch) {
-      this.checkSyncStatus(epoch, block, candidateUptime);
+      const candidatesExist = !!Object.keys(candidates).length;
 
-      if (!Object.keys(candidates).length && !inProgress) {
-        this.props.fetchElectionCandidates(block);
+      if (!inProgress) {
+        if (candidatesExist && isEmpty(candidateUptime)) {
+          this.checkSyncStatus(epoch, block, candidateUptime);
+        } else if (!inProgress && isEmpty(candidateUptime)) {
+          this.props.fetchElectionCandidates(block);
+        }
       }
     }
   }
@@ -73,9 +77,9 @@ class ElectionsContainer extends PureComponent<{
       //   unsyncedBlockIterator,
       //   async (_, idx) =>
       //     this.props.fetchElectionCandidateUptime(startingBlock + idx),
-      for (let i = 0; i < 5; i += 1) {
-        await this.props.fetchElectionCandidateUptime(startingBlock + i);
-      }
+      // for (let i = 0; i < 5; i += 1) {
+      await this.props.fetchElectionCandidateUptime(startingBlock);
+      // }
       // );
     }
   };
@@ -97,7 +101,7 @@ class ElectionsContainer extends PureComponent<{
 
     return (
       <Layout epoch={epoch} block={block}>
-        <Summary
+        {/* <Summary
           votes={totalVotes}
           earnings={earnings}
           uptime={averageUptime.toFixed(2)}
@@ -106,7 +110,7 @@ class ElectionsContainer extends PureComponent<{
           block={block}
           candidates={candidates}
           candidateGroups={candidateGroups}
-        />
+        /> */}
       </Layout>
     );
   };
