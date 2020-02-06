@@ -23,8 +23,10 @@ class ElectionsContainer extends PureComponent<{
   fetchElectionCandidates;
   fetchElectionCandidateUptime;
 }> {
-  componentDidMount() {
-    this.props.fetchElection();
+  constructor(props) {
+    super(props);
+
+    props.fetchElection();
   }
 
   componentDidUpdate(prevProps) {

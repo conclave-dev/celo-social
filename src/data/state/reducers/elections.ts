@@ -16,21 +16,35 @@ const initialState = initialStateDecorator({
   candidates: {},
   candidateGroups: {},
   candidateUptime: {},
-  pastElections: [],
+  previousElections: {},
 });
 
-const setElectionsCache = (state) => (state);
+const setElectionsCache = state => state;
 
 const getElectionsCache = (state, { state: cachedState }) => ({
   ...state,
   ...cachedState,
 });
 
-const fetchElection = (state, { epoch, block }) => ({
-  ...state,
-  epoch,
-  block,
-});
+const fetchElection = (state, { epoch, block }) => {
+  const { previousElections, ...election } = state;
+
+  // If the recently-restored cached election is older than one epoch...
+  // move it to previousElections, and sync from the current epoch
+  return {
+    ...(election.epoch < epoch
+      ? {
+          ...initialState,
+          epoch,
+          previousElections: {
+            ...election.previousElections,
+            [election.epoch]: election,
+          },
+        }
+      : { ...state }),
+    block,
+  };
+};
 
 const fetchElectionCandidates = (state, { candidates, candidateGroups }) => ({
   ...state,
