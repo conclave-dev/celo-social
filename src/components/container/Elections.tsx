@@ -33,8 +33,10 @@ class ElectionsContainer extends PureComponent<{
   }
 
   checkSyncStatus = () => {
-    const { block, candidates, candidateUptime } = this.props;
-    const lastUpdatedAt = candidateUptime[Object.keys(candidates)[0]].updatedAt;
+    const { epoch, block, candidates, candidateUptime } = this.props;
+    const firstEpochBlock = (epoch * 720) - 719;
+    const firstCandidateUptime = candidateUptime[Object.keys(candidates)[0]];
+    const lastUpdatedAt = firstCandidateUptime && (firstCandidateUptime.updatedAt || firstEpochBlock);
 
     if (isEmpty(candidateUptime) || lastUpdatedAt < block) {
       this.props.syncElectionCandidateUptime();

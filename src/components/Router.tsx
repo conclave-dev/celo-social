@@ -1,17 +1,20 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { memo } from 'react';
+import { Switch, Redirect, Route } from 'react-router-dom';
 import Elections from '../components/container/Elections';
 import User from './container/User';
 
-const Router = () => (
-  <Switch>
-  <Route path="/">
-    <Elections />
-  </Route>
-  <Route path="/user/:userid">
-    <User />
-  </Route>
-</Switch>
-);
+const Router = () => {
+  const routeRenderer = routeProps => <User {...routeProps} />;
 
-export default Router;
+  return (
+    <Switch>
+      <Redirect exact={true} from="/" to="/elections" />
+      <Route path="/elections">
+        <Elections />
+      </Route>
+      <Route path="/user/:userID" render={routeRenderer}></Route>
+    </Switch>
+  );
+};
+
+export default memo(Router);

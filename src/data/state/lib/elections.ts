@@ -8,8 +8,8 @@ export interface ElectionsState {
   averageUptime: number;
   earnings: number;
   candidates: { [key: string]: Candidate };
-  candidateGroups: { [key:string]: CandidateGroup };
-  candidateUptime: { [key:string]: CandidateUptime };
+  candidateGroups: { [key: string]: CandidateGroup };
+  candidateUptime: { [key: string]: CandidateUptime };
   isSyncing: boolean;
 }
 
@@ -30,7 +30,7 @@ export interface CandidateGroup {
 
 export interface CandidateUptime {
   updatedAt: number;
-        totalSignatures: number;
+  totalSignatures: number;
 }
 
 const getGroupAddresses = candidates =>

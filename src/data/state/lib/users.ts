@@ -1,8 +1,8 @@
-export interface Users {
+export interface UserState {
   hash: string;
-  profile: {};
-  accountSummary: {};
-  metadata: {};
+  profile: Profile;
+  accountSummary: AccountSummary;
+  metadata: Metadata;
 }
 
 export interface Profile {

@@ -21,20 +21,27 @@ const userState: UserState = {
   metadata: {
     claims: [],
     meta: {
-      address: "",
-      signature: "",
-    }
+      address: '',
+      signature: '',
+    },
   },
 };
 
 const initialState = initialStateDecorator(userState);
+
+const fetchUser = (state, { user }) => {
+  return {
+    ...state,
+    ...user,
+  }
+}
 
 export default (state = initialState, action) => {
   const { type } = action;
 
   switch (type) {
     case FETCH_USER:
-      return evalActionPayload(state, action, (state, action) => state);
+      return evalActionPayload(state, action, fetchUser);
     default:
       return state;
   }

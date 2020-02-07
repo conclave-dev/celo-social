@@ -16,9 +16,9 @@ const unpackResponse = async (response: Response) => {
     const { data } = await response.json();
     return data;
   } catch (err) {
-    return err;
+    throw err;
   }
-}
+};
 
 const apiFetch = async (endpoint: string, data: object = {}) => {
   try {
@@ -29,22 +29,21 @@ const apiFetch = async (endpoint: string, data: object = {}) => {
       }),
     );
   } catch (err) {
-    return err;
+    throw err;
   }
-}
+};
 
 const backendFetch = async (endpoint: string, data: object = {}) => {
   try {
     return unpackResponse(
       await fetch(`${backendBase}${endpoint}`, {
         ...defaultOptions('GET'),
-        ...isEmpty(data) ? { body: JSON.stringify(data) } : {},
+        ...(isEmpty(data) ? {} : { body: JSON.stringify(data) }),
       }),
     );
   } catch (err) {
-    return err;
+    throw err;
   }
-}
-
+};
 
 export { apiFetch, backendFetch };
