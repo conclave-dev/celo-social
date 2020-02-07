@@ -1,12 +1,14 @@
-const defaultOptions = {
-  method: 'POST',
+import { isEmpty } from 'lodash';
+
+const defaultOptions = (method = 'POST') => ({
+  method,
   headers: {
     'Content-Type': 'application/json',
-    Connection: 'Keep-Alive',
   },
-};
+});
 
 const apiBase = 'http://localhost:8080';
+const backendBase = 'http://localhost:8081';
 
 // Resolves the promise from calling `json` and returns the value of `data`
 const unpackResponse = async (response: Response) => {
@@ -22,7 +24,7 @@ const apiFetch = async (endpoint: string, data: object = {}) => {
   try {
     return unpackResponse(
       await fetch(`${apiBase}${endpoint}`, {
-        ...defaultOptions,
+        ...defaultOptions(),
         body: JSON.stringify(data),
       }),
     );
@@ -31,5 +33,18 @@ const apiFetch = async (endpoint: string, data: object = {}) => {
   }
 }
 
+const backendFetch = async (endpoint: string, data: object = {}) => {
+  try {
+    return unpackResponse(
+      await fetch(`${backendBase}${endpoint}`, {
+        ...defaultOptions('GET'),
+        ...isEmpty(data) ? { body: JSON.stringify(data) } : {},
+      }),
+    );
+  } catch (err) {
+    return err;
+  }
+}
 
-export { apiFetch, defaultOptions };
+
+export { apiFetch, backendFetch };
