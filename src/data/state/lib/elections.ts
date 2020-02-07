@@ -18,7 +18,6 @@ const getUpdatedUptime = async (blockNumber, candidateUptime, candidates) => {
   let totalSignatures = 0;
 
   forEach(candidates, ({ signerIndex, address }) => {
-
     const incrementUptimeBy = bitIsSet(
       parseBlockExtraData(header.extraData).parentAggregatedSeal.bitmap,
       signerIndex,

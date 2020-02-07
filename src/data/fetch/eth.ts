@@ -1,4 +1,4 @@
-import { apiFetch, defaultOptions } from './util';
+import { apiFetch } from './util';
 
 const getBlockNumber = () => apiFetch('/eth/getBlockNumber');
 

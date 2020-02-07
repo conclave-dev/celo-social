@@ -1,9 +1,7 @@
 import React, { memo } from 'react';
-import { Progress, Table, Spinner } from 'reactstrap';
-import { map } from 'lodash';
+import { Table, Spinner } from 'reactstrap';
+import { map, isEmpty } from 'lodash';
 import Candidate from './Candidate';
-import Anchor from '../reusable/Anchor';
-import fmt from '../../../utils/fmt';
 
 const Candidates = ({
   candidates,
@@ -36,7 +34,7 @@ const Candidates = ({
           </tr>
         </thead>
         <tbody>
-          {map(candidates, ({ address, name, groupAddress }) => {
+          {!isEmpty(candidates) ? map(candidates, ({ address, name, groupAddress }) => {
             const group = candidateGroups[groupAddress];
 
             return (
@@ -49,10 +47,10 @@ const Candidates = ({
                 groupName={group.name}
               />
             );
-          })}
+          }) : <></>}
         </tbody>
       </Table>
-      {!candidates.length && (
+      {isEmpty(candidates) && (
         <div className="d-flex justify-content-center">
           <Spinner type="grow" />
         </div>

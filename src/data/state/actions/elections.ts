@@ -4,8 +4,10 @@ import {
   FETCH_ELECTION_CANDIDATE_UPTIME,
   SET_ELECTIONS_CACHE,
   GET_ELECTIONS_CACHE,
+  SYNC_ELECTION_CANDIDATE_UPTIME,
 } from './util/types';
 import { actionWrapper } from '../lib/actions';
+import { validateStateFields } from '../lib/cache';
 import { getBlockNumber } from '../../fetch/eth';
 import {
   getElectedValidatorsOverview,
@@ -23,8 +25,15 @@ const setElectionsCache = () => {
 
     try {
       const { elections } = getState();
+      const { isValid, sanitizedState } = validateStateFields(
+        Object.keys(elections),
+        elections,
+        ['isSyncing'],
+      );
 
-      localStorage.setItem('elections', JSON.stringify(elections));
+      if (isValid) {
+        localStorage.setItem('elections', JSON.stringify(sanitizedState));
+      }
 
       return dispatch(packData({}));
     } catch (err) {
@@ -43,11 +52,13 @@ const getElectionsCache = () => {
     type: GET_ELECTIONS_CACHE,
   });
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(init());
 
     try {
-      const data = packData({ state: JSON.parse(localStorage.getItem('elections')) });
+      const data = packData({
+        state: JSON.parse(localStorage.getItem('elections')),
+      });
 
       return dispatch(data);
     } catch (err) {
@@ -130,9 +141,7 @@ const fetchElectionCandidateUptime = blockNumber => {
     dispatch(init);
 
     try {
-      const {
-        elections,
-      } = await getState();
+      const { elections } = await getState();
       const { candidateUptime, averageUptime } = await getUpdatedUptime(
         blockNumber,
         elections.candidateUptime,
@@ -156,10 +165,54 @@ const fetchElectionCandidateUptime = blockNumber => {
   };
 };
 
+const syncElectionCandidateUptime = () => {
+  const { packData, packError } = actionWrapper({
+    type: SYNC_ELECTION_CANDIDATE_UPTIME,
+  });
+
+  return async (dispatch, getState) => {
+    const {
+      candidateUptime,
+      candidates,
+      epoch,
+      block,
+      isSyncing,
+    } = getState().elections;
+
+    if (!isSyncing) {
+      dispatch(packData({ isSyncing: true }));
+    }
+
+    try {
+      const firstCandidate = candidateUptime[Object.keys(candidates)[0]];
+      const lastSynced = firstCandidate
+        ? firstCandidate.updatedAt
+        : epoch * 720 - 719;
+      const numUnsyncedBlocks = block - lastSynced - 1;
+
+      if (numUnsyncedBlocks) {
+        await fetchElectionCandidateUptime(lastSynced + 1)(dispatch, getState);
+        return syncElectionCandidateUptime()(dispatch, getState);
+      }
+
+      return dispatch(packData({ isSyncing: false }));
+    } catch (err) {
+      console.error(err);
+      const error = packError({
+        status: err.status,
+        message: err.message,
+      });
+
+      return dispatch(error);
+    }
+  };
+};
+
 export {
   setElectionsCache,
   getElectionsCache,
   fetchElection,
   fetchElectionCandidates,
   fetchElectionCandidateUptime,
+  syncElectionCandidateUptime,
 };
