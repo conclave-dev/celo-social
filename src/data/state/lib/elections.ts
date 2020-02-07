@@ -2,6 +2,37 @@ import { reduce, forEach, cloneDeep } from 'lodash';
 import { bitIsSet, parseBlockExtraData } from '@celo/utils/lib/istanbul';
 import { getBlockByNumber } from '../../fetch/eth';
 
+export interface ElectionsState {
+  epoch: number;
+  block: number;
+  averageUptime: number;
+  earnings: number;
+  candidates: { [key: string]: Candidate };
+  candidateGroups: { [key:string]: CandidateGroup };
+  candidateUptime: { [key:string]: CandidateUptime };
+  isSyncing: boolean;
+}
+
+export interface Candidate {
+  address: string;
+  groupAddress: string;
+  signerIndex: number;
+  score: number;
+  name: string;
+}
+
+export interface CandidateGroup {
+  name: string;
+  address: string;
+  members: string[];
+  votes: number;
+}
+
+export interface CandidateUptime {
+  updatedAt: number;
+        totalSignatures: number;
+}
+
 const getGroupAddresses = candidates =>
   reduce(
     candidates,
@@ -53,7 +84,7 @@ const calculateAverageUptime = (
   numCandidates,
 ) => {
   const completedEpochBlocks = currentBlock % 720;
-  return ((totalSignatures / numCandidates) / completedEpochBlocks) * 100;
+  return (totalSignatures / numCandidates / completedEpochBlocks) * 100;
 };
 
 export { getGroupAddresses, getUpdatedUptime };

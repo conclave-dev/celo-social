@@ -8,8 +8,9 @@ import {
 } from '../actions/util/types';
 import { evalActionPayload, initialStateDecorator } from '../lib/reducers';
 import { validateStateFields } from '../lib/cache';
+import { ElectionsState } from '../lib/elections';
 
-const initialState = initialStateDecorator({
+const electionsState: ElectionsState = {
   epoch: 0,
   block: 0,
   averageUptime: 0,
@@ -18,7 +19,9 @@ const initialState = initialStateDecorator({
   candidateGroups: {},
   candidateUptime: {},
   isSyncing: false,
-});
+}
+
+const initialState = initialStateDecorator(electionsState);
 
 const setElectionsCache = state => state;
 
