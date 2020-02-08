@@ -1,8 +1,8 @@
 import { FETCH_USER } from '../actions/util/types';
 import { evalActionPayload, initialStateDecorator } from '../lib/reducers';
-import { UserState } from '../lib/users';
+import { User } from '../lib/users';
 
-const userState: UserState = {
+const userState: User = {
   hash: '',
   profile: {
     name: '',

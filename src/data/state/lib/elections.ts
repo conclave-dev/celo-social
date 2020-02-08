@@ -2,7 +2,7 @@ import { reduce, forEach, cloneDeep } from 'lodash';
 import { bitIsSet, parseBlockExtraData } from '@celo/utils/lib/istanbul';
 import { getBlockByNumber } from '../../fetch/eth';
 
-export interface ElectionsState {
+export interface Election {
   epoch: number;
   block: number;
   averageUptime: number;

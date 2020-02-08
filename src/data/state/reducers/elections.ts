@@ -8,9 +8,9 @@ import {
 } from '../actions/util/types';
 import { evalActionPayload, initialStateDecorator } from '../lib/reducers';
 import { validateStateFields } from '../lib/cache';
-import { ElectionsState } from '../lib/elections';
+import { Election } from '../lib/elections';
 
-const electionsState: ElectionsState = {
+const electionsState: Election = {
   epoch: 0,
   block: 0,
   averageUptime: 0,
