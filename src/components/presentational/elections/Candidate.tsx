@@ -19,9 +19,7 @@ const Candidate = ({
     <th scope="row">{num}</th>
     <td>{fmt.bigInt(groupVotes)}</td>
     <td>
-      <Link
-        to={`/user/${address}`}
-      >
+      <Link to={`/user/${address}`} className="text-primary">
         {name}
       </Link>
     </td>
@@ -30,12 +28,9 @@ const Candidate = ({
         <Anchor
           href={`https://baklava-blockscout.celo-testnet.org/address/${groupAddress}/celo`}
         >
-          {groupName}
+          <span className="text-white text-underline">{groupName}</span>
         </Anchor>
       </div>
-    </td>
-    <td>
-      <span className={`badge badge-soft-success badge-pill`}>{`$0`}</span>
     </td>
     <td>
       <Progress multi={true}>

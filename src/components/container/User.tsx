@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import User from '../presentational/content/user/User';
-import Group from '../presentational/content/user/Group';
-import GroupMember from '../presentational/content/user/GroupMember';
+import Profile from '../presentational/content/user/Profile';
+// import Group from '../presentational/content/user/Group';
+// import GroupMember from '../presentational/content/user/GroupMember';
 import Balance from '../presentational/content/user/Balance';
 import ClaimStatus from '../presentational/content/user/ClaimStatus';
 import Layout from '../presentational/content/Layout';
@@ -29,15 +29,24 @@ class UserContainer extends PureComponent<{
       return <div />;
     }
 
-    const WrappedUser = () => <User profile={profile} accountName={accountSummary.name} />;
-    const WrappedClaimStatus = () => <ClaimStatus isClaimed={!!hash} />;
+    const WrappedProfile = () => (
+      <Profile
+        profile={profile}
+        accountName={accountSummary.name}
+        isClaimed={!!hash}
+      />
+    );
+    const WrappedClaimStatus = () => (
+      <ClaimStatus accountName={accountSummary.name} isClaimed={!!hash} />
+    );
     const WrappedBalance = () => <Balance />;
 
     return (
       <Layout
         profileName={profile.name}
         accountName={accountSummary.name}
-        User={WrappedUser}
+        address={accountSummary.address}
+        Profile={WrappedProfile}
         Claim={WrappedClaimStatus}
         Balance={WrappedBalance}
       />

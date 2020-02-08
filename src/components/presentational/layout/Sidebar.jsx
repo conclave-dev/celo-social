@@ -9,7 +9,7 @@ const SideNav = memo(() => (
     <ul className="metismenu" id="side-menu">
       <li className="menu-title">Overview</li>
       <li>
-        <Link to="/dashboard" className="waves-effect">
+        <Link to="/elections" className="waves-effect">
           <i className="ion ion-md-speedometer" />
           <span className="badge badge-success badge-pill float-right">2</span>{' '}
           <span>Elections</span>

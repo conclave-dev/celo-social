@@ -16,7 +16,7 @@ const Layout = ({
       <div className="page-title-box">
         <Row className="align-items-center">
           <Col>
-            <h4 className="page-title">Current Election</h4>
+            <h4 className="page-title">Elections</h4>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">Election #{epoch}</li>
               <li className="breadcrumb-item">{`Block #${fmt.int(block)}`}</li>

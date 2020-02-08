@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { reduce, isEmpty } from 'lodash';
+import { reduce, isEmpty, isInteger } from 'lodash';
 import Layout from '../presentational/elections/Layout';
 import Summary from '../presentational/elections/Summary';
 import Candidates from '../presentational/elections/Candidates';
@@ -9,7 +9,6 @@ import {
   setElectionsCache,
   fetchElection,
   fetchElectionCandidates,
-  fetchElectionCandidateUptime,
   syncElectionCandidateUptime,
 } from '../../data/state/actions/elections';
 
@@ -21,10 +20,9 @@ class ElectionsContainer extends PureComponent<{
   candidateGroups;
   averageUptime;
   candidateUptime;
-  setElectionsCache,
+  setElectionsCache;
   fetchElection;
   fetchElectionCandidates;
-  fetchElectionCandidateUptime;
   syncElectionCandidateUptime;
   inProgress;
   isSyncing;
@@ -35,11 +33,11 @@ class ElectionsContainer extends PureComponent<{
     props.fetchElection();
   }
 
-  intervalElectionFetcher = null
+  intervalElectionFetcher = null;
 
   cacheStore = () => {
     this.props.setElectionsCache();
-  }
+  };
 
   componentDidMount() {
     window.addEventListener('beforeunload', this.cacheStore);
@@ -62,29 +60,48 @@ class ElectionsContainer extends PureComponent<{
       : firstEpochBlock;
   };
 
-  handleEpochChange = () => {
-    const { block } = this.props;
-
-    if (block) {
-      this.props.fetchElectionCandidates(block);
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    const { epoch: prevEpoch, block: prevBlock, isSyncing: prevIsSyncing } = prevProps;
-    const { epoch, block, isSyncing, candidates, candidateUptime } = this.props;
+    const {
+      epoch: prevEpoch,
+      block: prevBlock,
+      isSyncing: prevIsSyncing,
+    } = prevProps;
+    const {
+      epoch,
+      block,
+      isSyncing,
+      candidates,
+      candidateUptime,
+      inProgress,
+    } = this.props;
+
+    if (inProgress || isSyncing) {
+      return;
+    }
 
     // If epochs are different or candidates = {}, fetch latest candidates
-    if (epoch && prevEpoch !== epoch) {
-      this.handleEpochChange();
+    if (
+      (isInteger(prevEpoch) &&
+        isInteger(epoch) &&
+        isInteger(block) &&
+        prevEpoch !== epoch) ||
+      isEmpty(candidates)
+    ) {
+      this.props.fetchElectionCandidates(block);
     }
 
-    if (!isSyncing && (isEmpty(candidateUptime) || (block && prevBlock !== block && !isEmpty(candidates) && !isSyncing))) {
+    if (
+      isEmpty(candidateUptime) ||
+      (block && prevBlock !== block && !isEmpty(candidates))
+    ) {
       this.props.syncElectionCandidateUptime();
     }
 
     if (prevIsSyncing && !isSyncing && !this.intervalElectionFetcher) {
-      this.intervalElectionFetcher = window.setInterval(this.props.fetchElection, 5000);
+      this.intervalElectionFetcher = window.setInterval(
+        this.props.fetchElection,
+        5000,
+      );
     }
   }
 
@@ -104,10 +121,7 @@ class ElectionsContainer extends PureComponent<{
     );
 
     return (
-      <Layout
-        epoch={epoch}
-        block={block}
-      >
+      <Layout epoch={epoch} block={block}>
         <Summary
           votes={totalVotes}
           earnings={earnings}
@@ -132,6 +146,5 @@ export default connect(mapStateToProps, {
   setElectionsCache,
   fetchElection,
   fetchElectionCandidates,
-  fetchElectionCandidateUptime,
   syncElectionCandidateUptime,
 })(ElectionsContainer);

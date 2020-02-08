@@ -87,8 +87,20 @@
   font-size: 16px;
 }
 
-.bg-pattern {
-  background-image: url("../../static-assets/images/bg-pattern.png");
+.bg-green {
+  background-image: url("../../static-assets/images/bg-green.svg");
+  background-size: cover;
+  background-position: bottom;
+}
+
+.bg-gold {
+  background-image: url("../../static-assets/images/bg-gold.svg");
+  background-size: cover;
+  background-position: bottom;
+}
+
+.bg-red {
+  background-image: url("../../static-assets/images/bg-red.svg");
   background-size: cover;
   background-position: bottom;
 }

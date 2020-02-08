@@ -5,13 +5,15 @@ import AccountStats from './user/AccountStats';
 const Layout = ({
   profileName,
   accountName,
-  User,
+  address,
+  Profile,
   Claim,
   Balance,
 }: {
-  profileName:string;
-  accountName:string;
-  User: any;
+  profileName: string;
+  accountName: string;
+  address: string;
+  Profile: any;
   Claim: any;
   Balance: any;
 }) => {
@@ -21,11 +23,11 @@ const Layout = ({
         <div className="page-title-box">
           <Row className="align-items-center">
             <Col sm="6">
-              <h4 className="page-title">{profileName}</h4>
+              <h4 className="page-title">{accountName}</h4>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">Users</li>
                 <li className="breadcrumb-item">Validators</li>
-                <li className="breadcrumb-item">{accountName}</li>
+                <li className="breadcrumb-item">{address}</li>
               </ol>
             </Col>
             <Col sm="6">
@@ -36,11 +38,10 @@ const Layout = ({
           </Row>
         </div>
         <Row>
-          <Col xl="3">
-            <User />
+          <Col xl="5">
+            <Profile />
           </Col>
-          <Col xl="3" />
-          <Col xl="6">
+          <Col xl="7">
             <Row>
               <Col lg="4">
                 <AccountStats

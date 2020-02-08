@@ -41,7 +41,8 @@ const setElectionsCache = () => {
         message: err.message,
       });
 
-      return dispatch(error);
+      dispatch(error);
+      throw err;
     }
   };
 };
@@ -66,7 +67,8 @@ const getElectionsCache = () => {
         message: err.message,
       });
 
-      return dispatch(error);
+      dispatch(error);
+      throw err;
     }
   };
 };
@@ -93,7 +95,8 @@ const fetchElection = () => {
         message: err.message,
       });
 
-      return dispatch(error);
+      dispatch(error);
+      throw err;
     }
   };
 };
@@ -126,7 +129,8 @@ const fetchElectionCandidates = blockNumber => {
         message: err.message,
       });
 
-      return dispatch(error);
+      dispatch(error);
+      throw err;
     }
   };
 };
@@ -159,7 +163,9 @@ const fetchElectionCandidateUptime = blockNumber => {
         message: err.message,
       });
 
-      return dispatch(error);
+      dispatch(error);
+
+      throw err;
     }
   };
 };
@@ -202,7 +208,8 @@ const syncElectionCandidateUptime = () => {
         message: err.message,
       });
 
-      return dispatch(error);
+      dispatch(error);
+      throw err;
     }
   };
 };
