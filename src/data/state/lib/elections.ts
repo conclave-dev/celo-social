@@ -11,6 +11,7 @@ export interface Election {
   candidateGroups: { [key: string]: CandidateGroup };
   candidateUptime: { [key: string]: CandidateUptime };
   isSyncing: boolean;
+  previousElections: { [key:number]: any};
 }
 
 export interface Candidate {

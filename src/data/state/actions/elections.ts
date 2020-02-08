@@ -7,7 +7,7 @@ import {
   SYNC_ELECTION_CANDIDATE_UPTIME,
 } from './util/types';
 import { actionWrapper } from '../lib/actions';
-import { validateStateFields } from '../lib/cache';
+import { validateState } from '../lib/cache';
 import { getBlockNumber } from '../../fetch/eth';
 import {
   getElectedValidatorsOverview,
@@ -25,11 +25,10 @@ const setElectionsCache = () => {
 
     try {
       const { elections } = getState();
-      const { isValid, sanitizedState } = validateStateFields(
-        Object.keys(elections),
-        elections,
-        ['isSyncing'],
-      );
+      const { isValid, sanitizedState } = validateState(elections, {
+        omitFields: ['isSyncing'],
+        ignoreFields: ['previousElections'],
+      });
 
       if (isValid) {
         localStorage.setItem('elections', JSON.stringify(sanitizedState));

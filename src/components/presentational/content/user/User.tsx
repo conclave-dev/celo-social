@@ -1,13 +1,14 @@
 import React, { memo } from 'react';
-import { Card, CardBody } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input, Card, CardBody } from 'reactstrap';
+import { Profile } from '../../../../data/state/lib/users';
 
-const User = ({}: // user,
-// score,
-// group,
-{
-  // user: UserType;
-  // score: number;
-  // group: CandidateGroup;
+
+const User = ({
+  profile: { name, photoURL, email },
+  accountName,
+}: {
+  profile: Profile;
+  accountName: string;
 }) => {
   return (
     <Card>
@@ -18,14 +19,23 @@ const User = ({}: // user,
             <div className="bg-white user-wid-content p-1 rounded">
               <div className="user-img">
                 <img
-                  src="https://media-exp1.licdn.com/dms/image/C5603AQE6LawtcUx-WA/profile-displayphoto-shrink_100_100/0?e=1586390400&v=beta&t=hVjgIpMGlcZEGoDQM-3AR1nXKoxJbjFo1qaTJdM7KGY"
+                  src={photoURL}
                   alt="user-img"
-                  title=""
+                  title={`${name}'s profile photo`}
                   className="rounded-circle thumb-md img-fluid"
                 />
               </div>
               <h5 className="font-14 mb-1">
-                <span>kp</span>{' '}
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">@</InputGroupAddon>
+                  <Input placeholder={accountName} />
+                </InputGroup>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">y
+                  </InputGroupAddon>
+                  <Input placeholder={accountName} />
+                </InputGroup>
+                <span>{`${name}`}</span>
               </h5>
               <p className="text-muted mb-2">
                 <small>Cofounder</small>

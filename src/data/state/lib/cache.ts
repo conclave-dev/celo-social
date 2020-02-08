@@ -1,33 +1,40 @@
-import { filter, omit, every, isBoolean, isObject, isEmpty, isNil, isNaN } from 'lodash';
+import {
+  omit,
+  every,
+  isBoolean,
+  isObject,
+  isEmpty,
+  isNil,
+  isNaN,
+} from 'lodash';
 
-const validateStateFields = (fields, state, otherOmitFields = []) => {
-  const sanitizedFields = filter(fields, (field: string) => !['inProgress', 'errorCode', 'errorMessage', ...otherOmitFields].includes(field));
+const validateState = (state, { omitFields, ignoreFields }) => {
   const sanitizedState = omit(state, [
     'inProgress',
     'errorCode',
     'errorMessage',
+    ...omitFields,
   ]);
 
   return {
-    isValid: every(
-      sanitizedFields,
-      field => {
-        const stateField = sanitizedState[field];
+    isValid: every(state, (val, key) => {
+      if (ignoreFields.includes(key)) {
+        return true;
+      }
 
-        // Don't consider booleans
-        if (isBoolean(stateField)) {
-          return true;
-        }
+      // Don't consider booleans
+      if (isBoolean(val)) {
+        return true;
+      }
 
-        if (isObject(stateField) || Array.isArray(stateField)) {
-          return !isEmpty(sanitizedState[field])
-        }
+      if (isObject(val) || Array.isArray(val)) {
+        return !isEmpty(val);
+      }
 
-        return (!isNil(sanitizedState[field]) && !isNaN(sanitizedState[field]));
-      },
-    ),
+      return !isNil(val) && !isNaN(val);
+    }),
     sanitizedState,
-  }
+  };
 };
 
-export { validateStateFields };
+export { validateState };

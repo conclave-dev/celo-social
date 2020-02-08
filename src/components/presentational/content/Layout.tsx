@@ -3,14 +3,16 @@ import { Row, Col } from 'reactstrap';
 import AccountStats from './user/AccountStats';
 
 const Layout = ({
+  profileName,
+  accountName,
   User,
   Claim,
-  Group,
   Balance,
 }: {
+  profileName:string;
+  accountName:string;
   User: any;
   Claim: any;
-  Group: any;
   Balance: any;
 }) => {
   return (
@@ -19,11 +21,11 @@ const Layout = ({
         <div className="page-title-box">
           <Row className="align-items-center">
             <Col sm="6">
-              <h4 className="page-title">{""}</h4>
+              <h4 className="page-title">{profileName}</h4>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">Users</li>
                 <li className="breadcrumb-item">Validators</li>
-                <li className="breadcrumb-item">{""}</li>
+                <li className="breadcrumb-item">{accountName}</li>
               </ol>
             </Col>
             <Col sm="6">
@@ -37,9 +39,7 @@ const Layout = ({
           <Col xl="3">
             <User />
           </Col>
-          <Col xl="3">
-            <Group />
-          </Col>
+          <Col xl="3" />
           <Col xl="6">
             <Row>
               <Col lg="4">

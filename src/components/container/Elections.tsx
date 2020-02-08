@@ -5,6 +5,8 @@ import Layout from '../presentational/elections/Layout';
 import Summary from '../presentational/elections/Summary';
 import Candidates from '../presentational/elections/Candidates';
 import {
+  getElectionsCache,
+  setElectionsCache,
   fetchElection,
   fetchElectionCandidates,
   fetchElectionCandidateUptime,
@@ -19,6 +21,7 @@ class ElectionsContainer extends PureComponent<{
   candidateGroups;
   averageUptime;
   candidateUptime;
+  setElectionsCache,
   fetchElection;
   fetchElectionCandidates;
   fetchElectionCandidateUptime;
@@ -28,43 +31,60 @@ class ElectionsContainer extends PureComponent<{
 }> {
   constructor(props) {
     super(props);
-
+    props.getElectionsCache();
     props.fetchElection();
   }
 
-  checkSyncStatus = () => {
-    const { epoch, block, candidates, candidateUptime } = this.props;
-    const firstEpochBlock = (epoch * 720) - 719;
-    const firstCandidateUptime = candidateUptime[Object.keys(candidates)[0]];
-    const lastUpdatedAt = firstCandidateUptime && (firstCandidateUptime.updatedAt || firstEpochBlock);
+  intervalElectionFetcher = null
 
-    if (isEmpty(candidateUptime) || lastUpdatedAt < block) {
-      this.props.syncElectionCandidateUptime();
+  cacheStore = () => {
+    this.props.setElectionsCache();
+  }
+
+  componentDidMount() {
+    window.addEventListener('beforeunload', this.cacheStore);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.cacheStore);
+  }
+
+  getSyncedBlock = () => {
+    const { epoch, candidates, candidateUptime } = this.props;
+    if (!epoch) {
+      return 0;
     }
+
+    const firstEpochBlock = epoch * 720 - 719;
+    const firstCandidateUptime = candidateUptime[Object.keys(candidates)[0]];
+    return firstCandidateUptime
+      ? firstCandidateUptime.updatedAt
+      : firstEpochBlock;
   };
 
-  componentDidUpdate(prevProps) {
-    const {
-      epoch: prevEpoch,
-      inProgress: prevInProgress,
-    } = prevProps;
-    const {
-      epoch,
-      block,
-      candidates,
-      inProgress,
-      isSyncing,
-    } = this.props;
+  handleEpochChange = () => {
+    const { block } = this.props;
 
-    if (!prevEpoch && epoch && isEmpty(candidates)) {
+    if (block) {
       this.props.fetchElectionCandidates(block);
-    } else if (
-      prevInProgress &&
-      !inProgress &&
-      !isEmpty(candidates) &&
-      !isSyncing
-    ) {
-      this.checkSyncStatus();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { epoch: prevEpoch, block: prevBlock, isSyncing: prevIsSyncing } = prevProps;
+    const { epoch, block, isSyncing, candidates, candidateUptime } = this.props;
+
+    // If epochs are different or candidates = {}, fetch latest candidates
+    if (epoch && prevEpoch !== epoch) {
+      this.handleEpochChange();
+    }
+
+    if (!isSyncing && (isEmpty(candidateUptime) || (block && prevBlock !== block && !isEmpty(candidates) && !isSyncing))) {
+      this.props.syncElectionCandidateUptime();
+    }
+
+    if (prevIsSyncing && !isSyncing && !this.intervalElectionFetcher) {
+      this.intervalElectionFetcher = window.setInterval(this.props.fetchElection, 5000);
     }
   }
 
@@ -84,7 +104,10 @@ class ElectionsContainer extends PureComponent<{
     );
 
     return (
-      <Layout epoch={epoch} block={block}>
+      <Layout
+        epoch={epoch}
+        block={block}
+      >
         <Summary
           votes={totalVotes}
           earnings={earnings}
@@ -105,6 +128,8 @@ const mapStateToProps = ({ elections }) => ({
 });
 
 export default connect(mapStateToProps, {
+  getElectionsCache,
+  setElectionsCache,
   fetchElection,
   fetchElectionCandidates,
   fetchElectionCandidateUptime,

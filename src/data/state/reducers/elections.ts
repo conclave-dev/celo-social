@@ -7,7 +7,7 @@ import {
   SYNC_ELECTION_CANDIDATE_UPTIME,
 } from '../actions/util/types';
 import { evalActionPayload, initialStateDecorator } from '../lib/reducers';
-import { validateStateFields } from '../lib/cache';
+import { validateState } from '../lib/cache';
 import { Election } from '../lib/elections';
 
 const electionsState: Election = {
@@ -19,7 +19,8 @@ const electionsState: Election = {
   candidateGroups: {},
   candidateUptime: {},
   isSyncing: false,
-}
+  previousElections: {},
+};
 
 const initialState = initialStateDecorator(electionsState);
 
@@ -30,11 +31,12 @@ const getElectionsCache = (state, { state: cachedState }) => {
     return state;
   }
 
-  const { isValid, sanitizedState } = validateStateFields(
-    Object.keys(initialState),
-    cachedState,
-    ['isSyncing'],
-  );
+  const { isValid, sanitizedState } = validateState(cachedState, {
+    omitFields: ['isSyncing'],
+    ignoreFields: ['previousElections'],
+  });
+
+  console.log('sanitizedCache', sanitizedState);
 
   if (!isValid) {
     localStorage.removeItem('elections');
@@ -48,7 +50,7 @@ const getElectionsCache = (state, { state: cachedState }) => {
 };
 
 const fetchElection = (state, { epoch, block }) => {
-  const { previousElections = {}, ...election } = state;
+  const { previousElections, ...election } = state;
 
   if (!election.epoch) {
     return {
@@ -61,12 +63,22 @@ const fetchElection = (state, { epoch, block }) => {
   // If the recently-restored cached election is older than one epoch...
   // move it to previousElections, and sync from the current epoch
   if (election.epoch < epoch) {
-    return {
-      ...state,
+    const newState = {
+      ...initialState,
       epoch,
       block,
       previousElections: { ...previousElections, [election.epoch]: election },
     };
+    const { isValid, sanitizedState } = validateState(newState, {
+      omitFields: ['isSyncing'],
+      ignoreFields: ['previousElections'],
+    });
+
+    if (isValid) {
+      localStorage.setItem('elections', JSON.stringify(sanitizedState));
+    }
+
+    return newState;
   }
 
   return {
@@ -90,7 +102,10 @@ const fetchElectionCandidateUptime = (
   averageUptime,
 });
 
-const syncElectionCandidateUptime = (state, action) => ({ ...state, isSyncing: action.isSyncing })
+const syncElectionCandidateUptime = (state, action) => ({
+  ...state,
+  isSyncing: action.isSyncing,
+});
 
 export default (state = initialState, action) => {
   const { type } = action;

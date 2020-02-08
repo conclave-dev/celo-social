@@ -22,47 +22,23 @@ class UserContainer extends PureComponent<{
 
   render = () => {
     const {
-      users: { accountSummary, hash, ...remainingUser },
-      candidates,
-      candidateGroups,
+      users: { accountSummary, hash, profile },
     } = this.props;
 
     if (!accountSummary.address) {
       return <div />;
     }
 
-    const { groupAddress } = candidates[accountSummary.address];
-    const { members } = candidateGroups[groupAddress];
-
-    const WrappedUser = () => <User />;
+    const WrappedUser = () => <User profile={profile} accountName={accountSummary.name} />;
     const WrappedClaimStatus = () => <ClaimStatus isClaimed={!!hash} />;
-    const WrappedGroup = () => (
-      <Group>
-        {members.map((member, idx) => {
-          if (!candidates[member]) {
-            return;
-          }
-
-          const { name: memberName, score: uptime } = candidates[member];
-
-          return (
-            <GroupMember
-              key={member}
-              position={idx + 1}
-              member={memberName}
-              uptime={uptime}
-            />
-          );
-        })}
-      </Group>
-    );
     const WrappedBalance = () => <Balance />;
 
     return (
       <Layout
+        profileName={profile.name}
+        accountName={accountSummary.name}
         User={WrappedUser}
         Claim={WrappedClaimStatus}
-        Group={WrappedGroup}
         Balance={WrappedBalance}
       />
     );
